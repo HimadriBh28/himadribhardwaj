@@ -723,3 +723,184 @@ body {
     font-size: 0.8rem;
   }
 }
+
+/* Education Section */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.education-card {
+  background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #2c2c2c;
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  border-color: #e50914;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.education-card.clickable {
+  cursor: pointer;
+  position: relative;
+}
+
+.education-card.clickable:hover {
+  background: linear-gradient(135deg, #2a1a1a 0%, #1a0f0f 100%);
+}
+
+.education-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.education-card h3 {
+  color: #e50914;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.education-duration {
+  color: #ffd700;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.education-description {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+}
+
+.click-hint {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #e50914;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Experience Modal */
+.experience-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10004;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.experience-modal {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  border: 2px solid #e50914;
+  animation: slideIn 0.4s ease;
+}
+
+.experience-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #e50914;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.experience-close:hover {
+  transform: scale(1.1);
+}
+
+.experience-modal h2 {
+  color: #e50914;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.experience-item {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.experience-item h3 {
+  color: #ffd700;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.experience-duration {
+  color: #b3b3b3;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.experience-role {
+  margin: 1rem 0 0 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #e50914;
+}
+
+.experience-role h4 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.role-duration {
+  color: #b3b3b3;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.experience-role ul, .experience-item ul {
+  margin-left: 1rem;
+  color: #b3b3b3;
+}
+
+.experience-role li, .experience-item li {
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .experience-modal {
+    padding: 1.5rem;
+  }
+  
+  .experience-modal h2 {
+    font-size: 1.4rem;
+  }
+  
+  .experience-item h3 {
+    font-size: 1.1rem;
+  }
+  
+  .experience-role {
+    margin-left: 0;
+  }
+}

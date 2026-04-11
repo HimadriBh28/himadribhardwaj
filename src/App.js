@@ -21,12 +21,13 @@ import {
   SiMysql,
   SiPostgresql
 } from 'react-icons/si';
-import { FaNodeJs, FaCss3Alt, FaDownload } from 'react-icons/fa';
+import { FaNodeJs, FaCss3Alt, FaDownload, FaTimes } from 'react-icons/fa';
 import './App.css';
 
 function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [showExperience, setShowExperience] = useState(false);
   const [githubStats, setGithubStats] = useState({ repos: 12, stars: 45, followers: 25 });
 
   const downloadResume = () => {
@@ -78,7 +79,6 @@ function App() {
     { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" }
   ];
 
-  // All projects from your GitHub
   const allProjects = [
     { 
       name: "MusicBoard", 
@@ -146,7 +146,6 @@ function App() {
   ];
 
   const featuredProjects = allProjects.filter(p => p.featured);
-  const otherProjects = allProjects.filter(p => !p.featured);
 
   if (!hasEntered) {
     return <EntryScreen onEnter={() => setHasEntered(true)} />;
@@ -161,6 +160,7 @@ function App() {
             <button onClick={() => setCurrentPage('home')}>Home</button>
             <button onClick={() => setCurrentPage('techStack')}>Tech Stack</button>
             <button onClick={() => setCurrentPage('projects')}>Projects</button>
+            <button onClick={() => setCurrentPage('education')}>Education</button>
             <button onClick={() => setCurrentPage('contact')}>Contact</button>
             <button onClick={downloadResume} className="resume-btn">
               <FaDownload /> Resume
@@ -261,6 +261,39 @@ function App() {
         </div>
       )}
 
+      {currentPage === 'education' && (
+        <div>
+          <div className="page-header">
+            <h1>Education</h1>
+            <p>My academic journey</p>
+          </div>
+          
+          <div className="section">
+            <div className="education-grid">
+              {/* School */}
+              <div className="education-card">
+                <div className="education-icon">��</div>
+                <h3>D.A.V. Fertiliser Public School</h3>
+                <p className="education-duration">2009 - 2023</p>
+                <p className="education-description">Completed schooling with focus on Science and Mathematics</p>
+              </div>
+              
+              {/* College - Clickable */}
+              <div 
+                className="education-card clickable" 
+                onClick={() => setShowExperience(true)}
+              >
+                <div className="education-icon">🎓</div>
+                <h3>Jaypee University of Information Technology, Solan</h3>
+                <p className="education-duration">2024 - Present</p>
+                <p className="education-description">Pursuing B.Tech in Computer Science</p>
+                <div className="click-hint">👆 Click to see my experience</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {currentPage === 'projects' && (
         <div>
           <div className="page-header">
@@ -308,6 +341,51 @@ function App() {
                 <p><i className="fab fa-linkedin"></i> linkedin.com/in/himadri-bhardwaj-947518289</p>
                 <p><i className="fas fa-map-marker-alt"></i> India</p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Experience Modal */}
+      {showExperience && (
+        <div className="experience-modal-overlay" onClick={() => setShowExperience(false)}>
+          <div className="experience-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="experience-close" onClick={() => setShowExperience(false)}>
+              <FaTimes />
+            </button>
+            <h2>My Experience at JUIT</h2>
+            
+            <div className="experience-item">
+              <h3>ACM Student Chapter, JUIT</h3>
+              <p className="experience-duration">1 yr 8 mos · Solan, Himachal Pradesh, India</p>
+              <div className="experience-role">
+                <h4>Design Team Lead</h4>
+                <p className="role-duration">Jan 2026 - Present · 4 mos</p>
+                <ul>
+                  <li>Leading the design team for ACM events and workshops</li>
+                  <li>Creating engaging visual content for social media</li>
+                  <li>Managing design projects and team coordination</li>
+                </ul>
+              </div>
+              <div className="experience-role">
+                <h4>Member</h4>
+                <p className="role-duration">Sep 2024 - Jan 2026 · 1 yr 5 mos</p>
+                <ul>
+                  <li>Active participant in ACM activities and events</li>
+                  <li>Contributed to technical workshops and sessions</li>
+                  <li>Skills: C++, Problem Solving</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="experience-item">
+              <h3>Technical Sciences, Movies & Photography Club (JYC)</h3>
+              <p className="experience-duration">Sep 2024 - Present · 1 yr 8 mos</p>
+              <ul>
+                <li>Member of the technical team</li>
+                <li>Skills: Photopea, Design, Content Creation</li>
+                <li>Contributing to club events and technical activities</li>
+              </ul>
             </div>
           </div>
         </div>
