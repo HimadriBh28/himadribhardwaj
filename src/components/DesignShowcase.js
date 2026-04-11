@@ -75,7 +75,7 @@ const DesignShowcase = () => {
       </div>
       
       <div className="design-showcase-footer">
-        <p>✨ Designs scrolling across the screen ✨</p>
+        
       </div>
     </div>
   );
