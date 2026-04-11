@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EntryScreen from './components/EntryScreen';
+import PriyanshiEasterEgg from './components/PriyanshiEasterEgg';
 import { 
   SiFlutter, 
   SiReact, 
@@ -26,9 +27,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [githubStats, setGithubStats] = useState({ repos: 12, stars: 45, followers: 25 });
 
-  // Resume download function
   const downloadResume = () => {
-    // Create a link to download the resume
     const link = document.createElement('a');
     link.href = '/resume/Himadri_Bhardwaj_Resume.pdf';
     link.download = 'Himadri_Bhardwaj_Resume.pdf';
@@ -116,9 +115,6 @@ function App() {
               <div className="hero-buttons">
                 <button className="btn-primary" onClick={() => document.querySelector('.projects-section')?.scrollIntoView({ behavior: 'smooth' })}>
                   Explore Work
-                </button>
-                <button onClick={downloadResume} className="btn-resume">
-                  <FaDownload /> Download Resume
                 </button>
                 <a href="mailto:himadribhardwaj56@gmail.com" className="btn-secondary">Contact Me</a>
               </div>
@@ -268,6 +264,8 @@ function App() {
         </div>
       )}
 
+      <PriyanshiEasterEgg />
+      
       <footer className="footer">
         <p>© 2025 Himadri Bhardwaj — Netflix Inspired Portfolio</p>
         <p className="heart">Crafted with <i className="fas fa-heart"></i> and React</p>
