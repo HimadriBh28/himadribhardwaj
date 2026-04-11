@@ -13,7 +13,7 @@ const Navigation = ({ setCurrentPage, currentPage }) => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <button className="logo" onClick={() => setCurrentPage('home')}>HIMADRI<span>_BH</span></button>
+        <button className="logo" onClick={() => setCurrentPage('home')}>PORT<span>FOLIO</span></button>
         <div className="nav-links">
           <button onClick={() => setCurrentPage('home')}>Home</button>
           <button onClick={() => setCurrentPage('projects')}>Projects</button>
