@@ -54,7 +54,7 @@ const DesignShowcase = () => {
   return (
     <div className="design-showcase">
       <div className="design-showcase-header">
-        <h2>�� My Creative Designs</h2>
+        <h2> My Designs</h2>
         <p>Posters and designs created for college events</p>
       </div>
       
