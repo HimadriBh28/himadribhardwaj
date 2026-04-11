@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Simple Navigation Component
-const Navigation = () => {
-  const [activePage, setActivePage] = useState('home');
+const Navigation = ({ setCurrentPage, currentPage }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -14,11 +13,11 @@ const Navigation = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <div className="logo" onClick={() => setActivePage('home')}>HIMADRI<span>_BH</span></div>
+        <button className="logo" onClick={() => setCurrentPage('home')}>HIMADRI<span>_BH</span></button>
         <div className="nav-links">
-          <button onClick={() => setActivePage('home')}>Home</button>
-          <button onClick={() => setActivePage('projects')}>Projects</button>
-          <button onClick={() => setActivePage('contact')}>Contact</button>
+          <button onClick={() => setCurrentPage('home')}>Home</button>
+          <button onClick={() => setCurrentPage('projects')}>Projects</button>
+          <button onClick={() => setCurrentPage('contact')}>Contact</button>
           <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer" className="github-btn">GitHub</a>
         </div>
       </div>
@@ -64,7 +63,7 @@ const HomePage = () => {
           <h1>Himadri <span className="gradient-text">Bhardwaj</span></h1>
           <p>Building innovative apps, immersive games, and automation tools that solve real problems. Passionate about Flutter, React Native, Unity, and full-stack development.</p>
           <div className="hero-buttons">
-            <button className="btn-primary" onClick={() => document.querySelector('.projects-section').scrollIntoView({ behavior: 'smooth' })}>
+            <button className="btn-primary" onClick={() => document.querySelector('.projects-section')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Work
             </button>
             <a href="mailto:himadribhardwaj56@gmail.com" className="btn-secondary">Contact Me</a>
@@ -124,7 +123,7 @@ const HomePage = () => {
         <div className="social-links">
           <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="mailto:himadribhardwaj56@gmail.com">Email</a>
-          <a href="#">LinkedIn</a>
+          <button onClick={() => window.open('#', '_blank')}>LinkedIn</button>
         </div>
       </div>
     </div>
@@ -211,34 +210,9 @@ const ContactPage = () => {
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
-  useEffect(() => {
-    const handleNavClick = () => {
-      const buttons = document.querySelectorAll('.nav-links button');
-      buttons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const page = e.target.innerText.toLowerCase();
-          if (page === 'home') setCurrentPage('home');
-          else if (page === 'projects') setCurrentPage('projects');
-          else if (page === 'contact') setCurrentPage('contact');
-        });
-      });
-    };
-    handleNavClick();
-  }, []);
-
   return (
     <div className="App">
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="logo" onClick={() => setCurrentPage('home')}>HIMADRI<span>_BH</span></div>
-          <div className="nav-links">
-            <button onClick={() => setCurrentPage('home')}>Home</button>
-            <button onClick={() => setCurrentPage('projects')}>Projects</button>
-            <button onClick={() => setCurrentPage('contact')}>Contact</button>
-            <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer" className="github-btn">GitHub</a>
-          </div>
-        </div>
-      </nav>
+      <Navigation setCurrentPage={setCurrentPage} currentPage={currentPage} />
       
       {currentPage === 'home' && <HomePage />}
       {currentPage === 'projects' && <ProjectsPage />}
