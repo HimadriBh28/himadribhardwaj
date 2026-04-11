@@ -6,6 +6,7 @@ import VineetEasterEgg from './components/VineetEasterEgg';
 import ResumeDownload from './components/ResumeDownload';
 import DesignShowcase from './components/DesignShowcase';
 import DesignsGallery from './components/DesignsGallery';
+import LeetCodeStats from './components/LeetCodeStats';
 import { 
   SiFlutter, 
   SiReact, 
@@ -98,7 +99,7 @@ function App() {
       tech: ["Unity", "C#", "ShaderLab"], 
       year: "2023", 
       link: "https://github.com/HimadriBh28/DodgeIt-",
-      icon: "��",
+      icon: "🎮",
       featured: true
     },
     { 
@@ -219,6 +220,8 @@ function App() {
             </div>
           </div>
           
+          <LeetCodeStats />
+          
           <div className="connect-section">
             <h3>Let's Connect & Create Something Amazing 🚀</h3>
             <p>I'm always open to collaborating on exciting projects, discussing tech, or just having a chat!</p>
@@ -284,7 +287,6 @@ function App() {
             </div>
           </div>
           
-          {/* Designs Gallery - Floating below education */}
           <DesignsGallery />
         </div>
       )}
