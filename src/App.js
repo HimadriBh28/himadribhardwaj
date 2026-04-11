@@ -18,13 +18,24 @@ import {
   SiMysql,
   SiPostgresql
 } from 'react-icons/si';
-import { FaNodeJs, FaCss3Alt } from 'react-icons/fa';
+import { FaNodeJs, FaCss3Alt, FaDownload } from 'react-icons/fa';
 import './App.css';
 
 function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [githubStats, setGithubStats] = useState({ repos: 12, stars: 45, followers: 25 });
+
+  // Resume download function
+  const downloadResume = () => {
+    // Create a link to download the resume
+    const link = document.createElement('a');
+    link.href = '/resume/Himadri_Bhardwaj_Resume.pdf';
+    link.download = 'Himadri_Bhardwaj_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     fetch('https://api.github.com/users/HimadriBh28')
@@ -87,6 +98,9 @@ function App() {
             <button onClick={() => setCurrentPage('techStack')}>Tech Stack</button>
             <button onClick={() => setCurrentPage('projects')}>Projects</button>
             <button onClick={() => setCurrentPage('contact')}>Contact</button>
+            <button onClick={downloadResume} className="resume-btn">
+              <FaDownload /> Resume
+            </button>
             <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer" className="github-btn">GitHub</a>
           </div>
         </div>
@@ -102,6 +116,9 @@ function App() {
               <div className="hero-buttons">
                 <button className="btn-primary" onClick={() => document.querySelector('.projects-section')?.scrollIntoView({ behavior: 'smooth' })}>
                   Explore Work
+                </button>
+                <button onClick={downloadResume} className="btn-resume">
+                  <FaDownload /> Download Resume
                 </button>
                 <a href="mailto:himadribhardwaj56@gmail.com" className="btn-secondary">Contact Me</a>
               </div>
