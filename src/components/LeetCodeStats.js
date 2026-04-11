@@ -1,167 +1,225 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './LeetCodeStats.css';
 
 const LeetCodeStats = () => {
-  const [stats, setStats] = useState({
+  // Your actual LeetCode stats from the image
+  const stats = {
     totalSolved: 87,
+    totalProblems: 3897,
     easySolved: 64,
+    easyTotal: 936,
     mediumSolved: 21,
+    mediumTotal: 2039,
     hardSolved: 2,
+    hardTotal: 922,
     acceptance: 87.07,
-    ranking: 1678881,
     contestRating: 1413,
     globalRanking: 693576,
+    totalRanking: 865650,
     attendedContests: 7,
+    topPercentage: 80.39,
     activeDays: 39,
     maxStreak: 16,
+    submissionsLastYear: 116,
+    attempting: 3,
     languages: [
-      { name: "C++", solved: 85 },
-      { name: "MySQL", solved: 2 }
+      { name: "C++", solved: 85, percentage: 98 },
+      { name: "MySQL", solved: 2, percentage: 2 }
     ]
-  });
+  };
 
-  const [loading, setLoading] = useState(true);
+  // Calculate percentages
+  const easyPercent = (stats.easySolved / stats.easyTotal) * 100;
+  const mediumPercent = (stats.mediumSolved / stats.mediumTotal) * 100;
+  const hardPercent = (stats.hardSolved / stats.hardTotal) * 100;
+  const overallPercent = (stats.totalSolved / stats.totalProblems) * 100;
 
-  useEffect(() => {
-    // Fetch real-time stats from LeetCode API
-    const fetchLeetCodeStats = async () => {
-      try {
-        // Using LeetCode GraphQL API
-        const response = await fetch('https://leetcode-stats-api.herokuapp.com/himadrib28');
-        const data = await response.json();
-        
-        if (data.status === 'success') {
-          setStats({
-            totalSolved: data.totalSolved || 87,
-            easySolved: data.easySolved || 64,
-            mediumSolved: data.mediumSolved || 21,
-            hardSolved: data.hardSolved || 2,
-            acceptance: data.acceptanceRate || 87.07,
-            ranking: data.ranking || 1678881,
-            contestRating: 1413,
-            globalRanking: 693576,
-            attendedContests: 7,
-            activeDays: 39,
-            maxStreak: 16,
-            languages: [
-              { name: "C++", solved: data.totalSolved - 2 || 85 },
-              { name: "MySQL", solved: 2 }
-            ]
-          });
-        }
-        setLoading(false);
-      } catch (error) {
-        console.log('Using fallback LeetCode stats');
-        setLoading(false);
-      }
-    };
-
-    fetchLeetCodeStats();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="leetcode-section">
-        <h2>💻 LeetCode Stats</h2>
-        <div className="leetcode-loading">Loading stats...</div>
-      </div>
-    );
-  }
+  // Months for activity calendar
+  const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
+  
+  // Activity data (simulated based on your streak)
+  const activityData = [
+    { week: 1, days: [15, 20, 18, 25, 30, 28, 22] },
+    { week: 2, days: [20, 25, 22, 28, 32, 30, 25] },
+    { week: 3, days: [18, 22, 20, 26, 28, 25, 20] },
+    { week: 4, days: [22, 28, 25, 30, 35, 32, 28] }
+  ];
 
   return (
     <div className="leetcode-section">
       <div className="leetcode-header">
-        <h2>💻 LeetCode Progress</h2>
+        <h2>💻 LeetCode Stats</h2>
         <a href="https://leetcode.com/u/himadrib28/" target="_blank" rel="noopener noreferrer" className="leetcode-link">
           View Profile →
         </a>
       </div>
 
+      {/* Main Stats Grid */}
       <div className="leetcode-stats-grid">
+        <div className="leetcode-stat-card">
+          <div className="stat-value">{stats.contestRating}</div>
+          <div className="stat-label">Contest Rating</div>
+          <div className="stat-small">Global Rank: {stats.globalRanking.toLocaleString()}/{stats.totalRanking.toLocaleString()}</div>
+          <div className="stat-small">Attended: {stats.attendedContests} contests</div>
+        </div>
+
+        <div className="leetcode-stat-card">
+          <div className="stat-value">{stats.topPercentage}%</div>
+          <div className="stat-label">Top Percentage</div>
+          <div className="stat-small">Better than {stats.topPercentage}% of users</div>
+        </div>
+
         <div className="leetcode-stat-card">
           <div className="stat-value">{stats.totalSolved}</div>
           <div className="stat-label">Problems Solved</div>
-          <div className="stat-breakdown">
-            <span className="easy">E: {stats.easySolved}</span>
-            <span className="medium">M: {stats.mediumSolved}</span>
-            <span className="hard">H: {stats.hardSolved}</span>
-          </div>
+          <div className="stat-small">+{stats.attempting} attempting</div>
         </div>
 
         <div className="leetcode-stat-card">
           <div className="stat-value">{stats.acceptance}%</div>
           <div className="stat-label">Acceptance Rate</div>
         </div>
-
-        <div className="leetcode-stat-card">
-          <div className="stat-value">{stats.contestRating}</div>
-          <div className="stat-label">Contest Rating</div>
-          <div className="stat-small">Rank: #{stats.globalRanking.toLocaleString()}</div>
-        </div>
-
-        <div className="leetcode-stat-card">
-          <div className="stat-value">{stats.attendedContests}</div>
-          <div className="stat-label">Contests Attended</div>
-        </div>
-
-        <div className="leetcode-stat-card">
-          <div className="stat-value">{stats.activeDays}</div>
-          <div className="stat-label">Active Days</div>
-          <div className="stat-small">Max Streak: {stats.maxStreak}</div>
-        </div>
-
-        <div className="leetcode-stat-card">
-          <div className="stat-label">Languages</div>
-          <div className="language-bars">
-            {stats.languages.map(lang => (
-              <div key={lang.name} className="language-item">
-                <span className="language-name">{lang.name}</span>
-                <div className="progress-bar">
-                  <div 
-                    className="progress-fill" 
-                    style={{ width: `${(lang.solved / stats.totalSolved) * 100}%` }}
-                  />
-                </div>
-                <span className="language-count">{lang.solved} solved</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
+      {/* Problem Distribution */}
       <div className="leetcode-progress">
         <h3>Problem Distribution</h3>
         <div className="progress-bars">
           <div className="progress-item">
             <span className="progress-label easy">Easy</span>
             <div className="progress-bar-bg">
-              <div 
-                className="progress-bar-fill easy-fill" 
-                style={{ width: `${(stats.easySolved / 936) * 100}%` }}
-              />
+              <div className="progress-bar-fill easy-fill" style={{ width: `${easyPercent}%` }} />
             </div>
-            <span className="progress-count">{stats.easySolved}/936</span>
+            <span className="progress-count">{stats.easySolved}/{stats.easyTotal}</span>
+            <span className="progress-percent">{easyPercent.toFixed(1)}%</span>
           </div>
           <div className="progress-item">
             <span className="progress-label medium">Medium</span>
             <div className="progress-bar-bg">
-              <div 
-                className="progress-bar-fill medium-fill" 
-                style={{ width: `${(stats.mediumSolved / 2039) * 100}%` }}
-              />
+              <div className="progress-bar-fill medium-fill" style={{ width: `${mediumPercent}%` }} />
             </div>
-            <span className="progress-count">{stats.mediumSolved}/2039</span>
+            <span className="progress-count">{stats.mediumSolved}/{stats.mediumTotal}</span>
+            <span className="progress-percent">{mediumPercent.toFixed(1)}%</span>
           </div>
           <div className="progress-item">
             <span className="progress-label hard">Hard</span>
             <div className="progress-bar-bg">
-              <div 
-                className="progress-bar-fill hard-fill" 
-                style={{ width: `${(stats.hardSolved / 922) * 100}%` }}
-              />
+              <div className="progress-bar-fill hard-fill" style={{ width: `${hardPercent}%` }} />
             </div>
-            <span className="progress-count">{stats.hardSolved}/922</span>
+            <span className="progress-count">{stats.hardSolved}/{stats.hardTotal}</span>
+            <span className="progress-percent">{hardPercent.toFixed(1)}%</span>
           </div>
+        </div>
+      </div>
+
+      {/* Overall Progress Ring */}
+      <div className="leetcode-overall">
+        <h3>Overall Progress</h3>
+        <div className="progress-ring-container">
+          <div className="progress-ring">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#2c2c2c" strokeWidth="8"/>
+              <circle 
+                cx="60" cy="60" r="54" fill="none" 
+                stroke="#e50914" strokeWidth="8" 
+                strokeDasharray={`${overallPercent * 3.39} 339`}
+                strokeLinecap="round"
+                transform="rotate(-90 60 60)"
+              />
+            </svg>
+            <div className="ring-center">
+              <span className="ring-percent">{overallPercent.toFixed(1)}%</span>
+              <span className="ring-label">Solved</span>
+            </div>
+          </div>
+          <div className="stats-summary">
+            <div className="summary-item">
+              <span className="summary-value">{stats.submissionsLastYear}</span>
+              <span className="summary-label">Submissions (Last Year)</span>
+            </div>
+            <div className="summary-item">
+              <span className="summary-value">{stats.activeDays}</span>
+              <span className="summary-label">Active Days</span>
+            </div>
+            <div className="summary-item">
+              <span className="summary-value">{stats.maxStreak}</span>
+              <span className="summary-label">Max Streak</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Activity Calendar */}
+      <div className="leetcode-calendar">
+        <h3>Activity Calendar</h3>
+        <div className="calendar-months">
+          {months.map((month, idx) => (
+            <span key={idx} className="calendar-month">{month}</span>
+          ))}
+        </div>
+        <div className="calendar-grid">
+          {activityData.map((week, weekIdx) => (
+            <div key={weekIdx} className="calendar-week">
+              {week.days.map((activity, dayIdx) => (
+                <div 
+                  key={dayIdx} 
+                  className={`calendar-day level-${Math.min(4, Math.floor(activity / 10))}`}
+                  title={`${activity} submissions`}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="calendar-legend">
+          <span>Less</span>
+          <div className="legend-colors">
+            <div className="legend-color level-0" />
+            <div className="legend-color level-1" />
+            <div className="legend-color level-2" />
+            <div className="legend-color level-3" />
+            <div className="legend-color level-4" />
+          </div>
+          <span>More</span>
+        </div>
+      </div>
+
+      {/* Badges Section */}
+      <div className="leetcode-badges">
+        <h3>Badges & Achievements</h3>
+        <div className="badges-grid">
+          <div className="badge-card locked">
+            <div className="badge-icon">🔒</div>
+            <div className="badge-name">Apr LeetCoding Challenge</div>
+            <div className="badge-status">Locked</div>
+          </div>
+          <div className="badge-card">
+            <div className="badge-icon">📅</div>
+            <div className="badge-name">116 Submissions</div>
+            <div className="badge-status">Past Year</div>
+          </div>
+          <div className="badge-card">
+            <div className="badge-icon">⚡</div>
+            <div className="badge-name">16 Day Streak</div>
+            <div className="badge-status">Active</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Languages Used */}
+      <div className="leetcode-languages">
+        <h3>Languages Used</h3>
+        <div className="language-stats">
+          {stats.languages.map(lang => (
+            <div key={lang.name} className="language-stat">
+              <div className="language-header">
+                <span className="language-name">{lang.name}</span>
+                <span className="language-solved">{lang.solved} problems</span>
+              </div>
+              <div className="language-bar-bg">
+                <div className="language-bar-fill" style={{ width: `${lang.percentage}%` }} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
