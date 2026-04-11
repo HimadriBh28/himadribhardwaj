@@ -1,36 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './LoadingAnimation.css';
 
 const LoadingAnimation = ({ onComplete }) => {
   const [animationState, setAnimationState] = useState('loading');
-  const [soundPlayed, setSoundPlayed] = useState(false);
+  const [showEnterButton, setShowEnterButton] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
-    // Play sound automatically (browser requires user interaction first)
-    const playSound = () => {
-      const audio = new Audio('/tudum-sound.mp3');
-      audio.volume = 0.5;
-      audio.play().catch(e => console.log('Audio play failed:', e));
-      setSoundPlayed(true);
-    };
+    // Create audio instance
+    audioRef.current = new Audio('/audio/tudum.mp3');
+    audioRef.current.volume = 0.6;
+    audioRef.current.load();
 
-    // Start animation sequence
+    // Start animation
     setTimeout(() => setAnimationState('logo'), 100);
+    
+    // Try to play sound
+    const tryPlaySound = () => {
+      if (audioRef.current) {
+        audioRef.current.play()
+          .then(() => {
+            console.log('Tudum sound playing!');
+          })
+          .catch(() => {
+            console.log('Browser requires user interaction');
+            setShowEnterButton(true);
+          });
+      }
+    };
+    
+    setTimeout(tryPlaySound, 200);
     setTimeout(() => setAnimationState('split'), 800);
     setTimeout(() => setAnimationState('lines'), 1200);
     setTimeout(() => setAnimationState('reveal'), 1800);
-    setTimeout(() => {
+    
+    const completeTimer = setTimeout(() => {
       setAnimationState('complete');
       setTimeout(onComplete, 500);
     }, 2500);
 
-    // Try to play sound (will work after user interaction)
-    document.body.addEventListener('click', playSound, { once: true });
-    
     return () => {
-      document.body.removeEventListener('click', playSound);
+      clearTimeout(completeTimer);
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, [onComplete]);
+
+  const handleEnterClick = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+    setShowEnterButton(false);
+    // Complete the animation
+    setAnimationState('complete');
+    setTimeout(onComplete, 500);
+  };
 
   return (
     <div className={`loading-screen ${animationState === 'complete' ? 'fade-out' : ''}`}>
@@ -55,6 +80,18 @@ const LoadingAnimation = ({ onComplete }) => {
           <div className="netflix-text">PORTFOLIO</div>
           <div className="subtitle">Himadri Bhardwaj</div>
         </div>
+        
+        {showEnterButton && (
+          <button className="enter-button" onClick={handleEnterClick}>
+            Click to Enter <i className="fas fa-play"></i>
+          </button>
+        )}
+      </div>
+      
+      <div className="sound-wave">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
   );
