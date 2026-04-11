@@ -3,6 +3,7 @@ import EntryScreen from './components/EntryScreen';
 import PriyanshiEasterEgg from './components/PriyanshiEasterEgg';
 import MeenakshiEasterEgg from './components/MeenakshiEasterEgg';
 import VineetEasterEgg from './components/VineetEasterEgg';
+import ResumeDownload from './components/ResumeDownload';
 import { 
   SiFlutter, 
   SiReact, 
@@ -21,7 +22,7 @@ import {
   SiMysql,
   SiPostgresql
 } from 'react-icons/si';
-import { FaNodeJs, FaCss3Alt, FaDownload, FaTimes } from 'react-icons/fa';
+import { FaNodeJs, FaCss3Alt, FaTimes } from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -29,15 +30,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [showExperience, setShowExperience] = useState(false);
   const [githubStats, setGithubStats] = useState({ repos: 12, stars: 45, followers: 25 });
-
-  const downloadResume = () => {
-    const link = document.createElement('a');
-    link.href = '/resume/Himadri_Bhardwaj_Resume.pdf';
-    link.download = 'Himadri_Bhardwaj_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   useEffect(() => {
     fetch('https://api.github.com/users/HimadriBh28')
@@ -82,7 +74,7 @@ function App() {
   const allProjects = [
     { 
       name: "MusicBoard", 
-      desc: "A Flutter music app that lets users rate and review albums. Features include user authentication, album database, and rating system.", 
+      desc: "A Flutter music app that lets users rate and review albums.", 
       tech: ["Flutter", "Dart", "Firebase"], 
       year: "2024", 
       link: "https://github.com/HimadriBh28/MusicBoard",
@@ -91,7 +83,7 @@ function App() {
     },
     { 
       name: "movie_review_app", 
-      desc: "React Native app for reviewing movies with ratings and comments. Real-time updates and user profiles.", 
+      desc: "React Native app for reviewing movies with ratings and comments.", 
       tech: ["React Native", "TypeScript", "Node.js"], 
       year: "2024", 
       link: "https://github.com/HimadriBh28/movie_review_app",
@@ -100,7 +92,7 @@ function App() {
     },
     { 
       name: "DodgeIt! Game", 
-      desc: "My first Unity game where players navigate through obstacles. Built with C# and Unity Engine.", 
+      desc: "My first Unity game where players navigate through obstacles.", 
       tech: ["Unity", "C#", "ShaderLab"], 
       year: "2023", 
       link: "https://github.com/HimadriBh28/DodgeIt-",
@@ -109,7 +101,7 @@ function App() {
     },
     { 
       name: "AlumniConnect", 
-      desc: "Full-stack alumni management platform connecting graduates with current students. Features user profiles, messaging, and event management.", 
+      desc: "Full-stack alumni management platform connecting graduates with current students.", 
       tech: ["MongoDB", "Express.js", "React", "Node.js"], 
       year: "2024", 
       link: "https://github.com/HimadriBh28/AlumniConnect",
@@ -118,8 +110,8 @@ function App() {
     },
     { 
       name: "Secure Login System", 
-      desc: "Secure authentication system built with PHP and MySQL with session management and password hashing.", 
-      tech: ["PHP", "MySQL", "HTML/CSS", "JavaScript"], 
+      desc: "Secure authentication system built with PHP and MySQL.", 
+      tech: ["PHP", "MySQL", "HTML/CSS"], 
       year: "2023", 
       link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
       icon: "🔐",
@@ -127,7 +119,7 @@ function App() {
     },
     { 
       name: "Duplicate Cleaner", 
-      desc: "UNIX tool to scan and clean duplicate files efficiently using shell scripting. Features recursive scanning and hash-based comparison.", 
+      desc: "UNIX tool to scan and clean duplicate files efficiently.", 
       tech: ["Shell", "Bash", "UNIX"], 
       year: "2023", 
       link: "https://github.com/HimadriBh28/DuplicateCleanerProject",
@@ -162,9 +154,7 @@ function App() {
             <button onClick={() => setCurrentPage('projects')}>Projects</button>
             <button onClick={() => setCurrentPage('education')}>Education</button>
             <button onClick={() => setCurrentPage('contact')}>Contact</button>
-            <button onClick={downloadResume} className="resume-btn">
-              <FaDownload /> Resume
-            </button>
+            <ResumeDownload />
             <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer" className="github-btn">GitHub</a>
           </div>
         </div>
@@ -176,9 +166,9 @@ function App() {
             <div className="hero-content">
               <div className="hero-badge">🎨 FULL-STACK & GAME DEVELOPER</div>
               <h1>Himadri <span className="gradient-text">Bhardwaj</span></h1>
-              <p>Building innovative apps, immersive games, and automation tools that solve real problems. Passionate about Flutter, React Native, Unity, and full-stack development.</p>
+              <p>Building innovative apps, immersive games, and automation tools that solve real problems.</p>
               <div className="hero-buttons">
-                <button className="btn-primary" onClick={() => document.querySelector('.projects-section')?.scrollIntoView({ behavior: 'smooth' })}>
+                <button className="btn-primary" onClick={() => setCurrentPage('projects')}>
                   Explore Work
                 </button>
                 <a href="mailto:himadribhardwaj56@gmail.com" className="btn-secondary">Contact Me</a>
@@ -270,15 +260,13 @@ function App() {
           
           <div className="section">
             <div className="education-grid">
-              {/* School */}
               <div className="education-card">
-                <div className="education-icon">��</div>
+                <div className="education-icon">🏫</div>
                 <h3>D.A.V. Fertiliser Public School</h3>
                 <p className="education-duration">2009 - 2023</p>
                 <p className="education-description">Completed schooling with focus on Science and Mathematics</p>
               </div>
               
-              {/* College - Clickable */}
               <div 
                 className="education-card clickable" 
                 onClick={() => setShowExperience(true)}
@@ -379,12 +367,26 @@ function App() {
             </div>
 
             <div className="experience-item">
-              <h3>Technical Sciences, Movies & Photography Club (JYC)</h3>
-              <p className="experience-duration">Sep 2024 - Present · 1 yr 8 mos</p>
+              <h3>Koshish Club</h3>
+              <p className="experience-duration">Sep 2024 - Aug 2025 · 1 yr</p>
+              <ul>
+                <li>Member of the social initiative club</li>
+                <li>Teaching underprivileged children in the community</li>
+                <li>Organized educational workshops and activities for kids</li>
+                <li>Helped bridge the educational gap for underserved communities</li>
+                <li>Skills: Teaching, Communication, Social Work, Patience</li>
+              </ul>
+            </div>
+
+            <div className="experience-item">
+              <h3>Technical Club (JYC - Technical Sciences, Movies & Photography Club)</h3>
+              <p className="experience-duration">Sep 2024 - Mar 2026 · 1 yr 7 mos</p>
               <ul>
                 <li>Member of the technical team</li>
-                <li>Skills: Photopea, Design, Content Creation</li>
+                <li>Skills: Photopea, Design, Content Creation, Technical Support</li>
                 <li>Contributing to club events and technical activities</li>
+                <li>Assisted in organizing technical workshops and film screenings</li>
+                <li>Contributed to photography and design projects for club promotions</li>
               </ul>
             </div>
           </div>
