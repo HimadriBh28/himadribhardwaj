@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import LoadingAnimation from './components/LoadingAnimation';
 
-// Simple Navigation Component
+// Navigation Component
 const Navigation = ({ setCurrentPage, currentPage }) => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -13,7 +14,7 @@ const Navigation = ({ setCurrentPage, currentPage }) => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <button className="logo" onClick={() => setCurrentPage('home')}>PORT<span>FOLIO</span></button>
+        <button className="logo" onClick={() => setCurrentPage('home')}>HB<span>_PORTFOLIO</span></button>
         <div className="nav-links">
           <button onClick={() => setCurrentPage('home')}>Home</button>
           <button onClick={() => setCurrentPage('projects')}>Projects</button>
@@ -28,13 +29,27 @@ const Navigation = ({ setCurrentPage, currentPage }) => {
 // Home Page Component
 const HomePage = () => {
   const featuredProjects = [
-    { name: "MusicBoard", desc: "Flutter music app to rate and review albums", tech: "Flutter, Dart", icon: "🎵" },
-    { name: "movie_review_app", desc: "React Native app for reviewing movies with ratings", tech: "React Native, TypeScript", icon: "🎬" },
-    { name: "DodgeIt! Game", desc: "Unity game where players navigate through obstacles", tech: "Unity, C#", icon: "🎮" },
-    { name: "AlumniConnect", desc: "Full-stack alumni management platform", tech: "MERN Stack", icon: "👥" }
+    { name: "MusicBoard", desc: "Flutter music app to rate and review albums", tech: "Flutter, Dart", icon: "🎵", color: "#e91e63" },
+    { name: "movie_review_app", desc: "React Native app for reviewing movies with ratings", tech: "React Native, TypeScript", icon: "🎬", color: "#9c27b0" },
+    { name: "DodgeIt! Game", desc: "Unity game where players navigate through obstacles", tech: "Unity, C#", icon: "🎮", color: "#2196f3" },
+    { name: "AlumniConnect", desc: "Full-stack alumni management platform", tech: "MERN Stack", icon: "👥", color: "#4caf50" }
   ];
 
-  const skills = ["Flutter", "React Native", "Unity", "MongoDB", "Express.js", "React", "Node.js", "PHP", "Dart", "TypeScript", "Shell Scripting", "Firebase"];
+  const skills = [
+    { name: "Flutter", icon: "📱", color: "#42a5f5" },
+    { name: "React Native", icon: "⚛️", color: "#61dafb" },
+    { name: "Unity", icon: "🎮", color: "#808080" },
+    { name: "MongoDB", icon: "🍃", color: "#47a248" },
+    { name: "Express.js", icon: "🚂", color: "#787878" },
+    { name: "React", icon: "⚛️", color: "#61dafb" },
+    { name: "Node.js", icon: "🟢", color: "#339933" },
+    { name: "PHP", icon: "🐘", color: "#777bb4" },
+    { name: "Dart", icon: "🎯", color: "#00b4ab" },
+    { name: "TypeScript", icon: "📘", color: "#3178c6" },
+    { name: "Shell Scripting", icon: "🐚", color: "#4eaa25" },
+    { name: "Firebase", icon: "🔥", color: "#ffca28" }
+  ];
+  
   const [githubStats, setGithubStats] = useState({ repos: 12, stars: 45, followers: 25 });
 
   useEffect(() => {
@@ -76,7 +91,7 @@ const HomePage = () => {
         <div className="projects-grid">
           {featuredProjects.map(project => (
             <div key={project.name} className="project-card">
-              <div className="project-icon">{project.icon}</div>
+              <div className="project-icon" style={{ fontSize: '2.5rem' }}>{project.icon}</div>
               <h3>{project.name}</h3>
               <p>{project.desc}</p>
               <div className="project-tech">
@@ -91,9 +106,9 @@ const HomePage = () => {
         <h2>Tech Stack & Skills</h2>
         <div className="skills-grid">
           {skills.map(skill => (
-            <div key={skill} className="skill-card">
-              <i className="fas fa-code"></i>
-              <span>{skill}</span>
+            <div key={skill.name} className="skill-card" style={{ borderLeftColor: skill.color }}>
+              <div className="skill-icon" style={{ fontSize: '2rem' }}>{skill.icon}</div>
+              <span className="skill-name">{skill.name}</span>
             </div>
           ))}
         </div>
@@ -133,12 +148,12 @@ const HomePage = () => {
 // Projects Page Component
 const ProjectsPage = () => {
   const allProjects = [
-    { name: "MusicBoard", desc: "A Flutter music app that lets users rate and review albums.", tech: ["Flutter", "Dart", "Firebase"], year: "2024", link: "https://github.com/HimadriBh28/MusicBoard" },
-    { name: "movie_review_app", desc: "React Native app for reviewing movies with ratings and comments.", tech: ["React Native", "TypeScript", "Node.js"], year: "2024", link: "https://github.com/HimadriBh28/movie_review_app" },
-    { name: "DodgeIt! Game", desc: "My first Unity game where players navigate through obstacles.", tech: ["Unity", "C#", "ShaderLab"], year: "2023", link: "https://github.com/HimadriBh28/DodgeIt-" },
-    { name: "AlumniConnect", desc: "Full-stack alumni management platform connecting graduates with current students.", tech: ["MongoDB", "Express.js", "React", "Node.js"], year: "2024", link: "https://github.com/HimadriBh28/AlumniConnect" },
-    { name: "Secure Login System", desc: "Secure authentication system built with PHP and MySQL.", tech: ["PHP", "MySQL", "HTML/CSS"], year: "2023", link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System" },
-    { name: "Duplicate Cleaner", desc: "UNIX tool to scan and clean duplicate files efficiently.", tech: ["Shell", "Bash", "UNIX"], year: "2023", link: "https://github.com/HimadriBh28/DuplicateCleanerProject" }
+    { name: "MusicBoard", desc: "A Flutter music app that lets users rate and review albums.", tech: ["Flutter", "Dart", "Firebase"], year: "2024", link: "https://github.com/HimadriBh28/MusicBoard", icon: "🎵" },
+    { name: "movie_review_app", desc: "React Native app for reviewing movies with ratings and comments.", tech: ["React Native", "TypeScript", "Node.js"], year: "2024", link: "https://github.com/HimadriBh28/movie_review_app", icon: "🎬" },
+    { name: "DodgeIt! Game", desc: "My first Unity game where players navigate through obstacles.", tech: ["Unity", "C#", "ShaderLab"], year: "2023", link: "https://github.com/HimadriBh28/DodgeIt-", icon: "🎮" },
+    { name: "AlumniConnect", desc: "Full-stack alumni management platform connecting graduates with current students.", tech: ["MongoDB", "Express.js", "React", "Node.js"], year: "2024", link: "https://github.com/HimadriBh28/AlumniConnect", icon: "👥" },
+    { name: "Secure Login System", desc: "Secure authentication system built with PHP and MySQL.", tech: ["PHP", "MySQL", "HTML/CSS"], year: "2023", link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System", icon: "🔐" },
+    { name: "Duplicate Cleaner", desc: "UNIX tool to scan and clean duplicate files efficiently.", tech: ["Shell", "Bash", "UNIX"], year: "2023", link: "https://github.com/HimadriBh28/DuplicateCleanerProject", icon: "🧹" }
   ];
 
   return (
@@ -151,6 +166,7 @@ const ProjectsPage = () => {
         <div className="projects-grid">
           {allProjects.map(project => (
             <div key={project.name} className="project-card large">
+              <div className="project-icon" style={{ fontSize: '2rem' }}>{project.icon}</div>
               <h3>{project.name}</h3>
               <p>{project.desc}</p>
               <div className="project-meta">
@@ -209,6 +225,24 @@ const ContactPage = () => {
 // Main App Component
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if animation has been shown before
+    const hasSeenAnimation = localStorage.getItem('hasSeenHBAnimation');
+    if (hasSeenAnimation) {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleAnimationComplete = () => {
+    localStorage.setItem('hasSeenHBAnimation', 'true');
+    setLoading(false);
+  };
+
+  if (loading) {
+    return <LoadingAnimation onComplete={handleAnimationComplete} />;
+  }
 
   return (
     <div className="App">
