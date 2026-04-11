@@ -28,7 +28,7 @@ import {
   SiPrometheus,
   SiGrafana
 } from 'react-icons/si';
-import { FaJava, FaNodeJs, FaCss3Alt, FaAws } from 'react-icons/fa';
+import { FaNodeJs, FaCss3Alt, FaAws } from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -184,7 +184,7 @@ function App() {
             <div className="social-links">
               <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="mailto:himadribhardwaj56@gmail.com">Email</a>
-              <button onClick={() => window.open('https://linkedin.com/in/himadribhardwaj', '_blank')}>LinkedIn</button>
+              <button onClick={() => window.open('#', '_blank')}>LinkedIn</button>
             </div>
           </div>
         </div>
