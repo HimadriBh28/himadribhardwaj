@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EntryScreen from './components/EntryScreen';
 import PriyanshiEasterEgg from './components/PriyanshiEasterEgg';
+import MeenakshiEasterEgg from './components/MeenakshiEasterEgg';
 import { 
   SiFlutter, 
   SiReact, 
@@ -156,7 +157,7 @@ function App() {
           </div>
           
           <div className="connect-section">
-            <h3>Let's Connect & Create Something Amazing 🚀</h3>
+            <h3>Let's Connect & Create Something Amazing ��</h3>
             <p>I'm always open to collaborating on exciting projects, discussing tech, or just having a chat!</p>
             <div className="social-links">
               <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -265,6 +266,7 @@ function App() {
       )}
 
       <PriyanshiEasterEgg />
+      <MeenakshiEasterEgg />
       
       <footer className="footer">
         <p>© 2025 Himadri Bhardwaj — Netflix Inspired Portfolio</p>
