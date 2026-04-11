@@ -1,10 +1,10 @@
-.netflix-loader {
+.loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000;
+  background: #000;
   z-index: 10000;
   display: flex;
   align-items: center;
@@ -12,87 +12,42 @@
   transition: opacity 0.8s ease;
 }
 
-.netflix-loader.fade-out {
+.loading-overlay.fade-out {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Red Flash Effect (Netflix style) */
-.red-flash {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #e50914;
-  opacity: 0;
-  transition: opacity 0.01s;
-  pointer-events: none;
+.loading-container {
+  text-align: center;
 }
 
-.red-flash.active {
-  animation: netflixFlash 0.6s ease-out forwards;
+.hb-logo {
+  animation: logoPop 0.6s ease-out;
 }
 
-@keyframes netflixFlash {
+.h-letter {
+  font-size: 100px;
+  font-weight: 900;
+  color: #e50914;
+  display: inline-block;
+  animation: letterGlow 0.5s ease;
+}
+
+.b-letter {
+  font-size: 100px;
+  font-weight: 900;
+  color: #fff;
+  display: inline-block;
+  animation: letterGlow 0.5s ease 0.1s;
+}
+
+@keyframes logoPop {
   0% {
+    transform: scale(0);
     opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.8;
   }
   60% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* HB Logo Container */
-.hb-container {
-  opacity: 0;
-  transform: scale(3);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
-}
-
-.hb-container.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.hb-logo-netflix {
-  display: flex;
-  gap: 20px;
-  font-size: 120px;
-  font-weight: 900;
-  letter-spacing: -5px;
-}
-
-.hb-h {
-  color: #e50914;
-  text-shadow: 0 0 50px rgba(229, 9, 20, 0.5);
-  animation: hbPulse 0.8s ease;
-}
-
-.hb-b {
-  color: #ffffff;
-  text-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
-  animation: hbPulse 0.8s ease 0.1s;
-}
-
-@keyframes hbPulse {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  50% {
     transform: scale(1.2);
-    text-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
   }
   100% {
     transform: scale(1);
@@ -100,34 +55,67 @@
   }
 }
 
-/* Netflix Scanning Lines */
-.scan-lines {
-  position: absolute;
+@keyframes letterGlow {
+  0% {
+    text-shadow: 0 0 0px rgba(229, 9, 20, 0);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 0px rgba(229, 9, 20, 0);
+  }
+}
+
+.red-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e50914;
+  animation: flash 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.scanning-lines {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0;
-  z-index: 5;
-}
-
-.scan-lines.active {
-  opacity: 1;
 }
 
 .scan-line {
   position: absolute;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(229, 9, 20, 0.8) 50%, 
-    transparent 100%
-  );
-  animation: scanMove 0.8s ease-out forwards;
-  opacity: 0;
+  background: linear-gradient(90deg, transparent, #e50914, transparent);
+  animation: scanMove 0.6s ease-out forwards;
 }
+
+.scan-line:nth-child(1) { top: 10%; animation-delay: 0s; }
+.scan-line:nth-child(2) { top: 20%; animation-delay: 0.04s; }
+.scan-line:nth-child(3) { top: 30%; animation-delay: 0.08s; }
+.scan-line:nth-child(4) { top: 40%; animation-delay: 0.12s; }
+.scan-line:nth-child(5) { top: 50%; animation-delay: 0.16s; }
+.scan-line:nth-child(6) { top: 60%; animation-delay: 0.20s; }
+.scan-line:nth-child(7) { top: 70%; animation-delay: 0.24s; }
+.scan-line:nth-child(8) { top: 80%; animation-delay: 0.28s; }
+.scan-line:nth-child(9) { top: 90%; animation-delay: 0.32s; }
 
 @keyframes scanMove {
   0% {
@@ -143,184 +131,50 @@
   }
 }
 
-/* Generate scan lines at different positions */
-.scan-line:nth-child(1) { top: 5%; animation-delay: 0s; }
-.scan-line:nth-child(2) { top: 10%; animation-delay: 0.03s; }
-.scan-line:nth-child(3) { top: 15%; animation-delay: 0.06s; }
-.scan-line:nth-child(4) { top: 20%; animation-delay: 0.09s; }
-.scan-line:nth-child(5) { top: 25%; animation-delay: 0.12s; }
-.scan-line:nth-child(6) { top: 30%; animation-delay: 0.15s; }
-.scan-line:nth-child(7) { top: 35%; animation-delay: 0.18s; }
-.scan-line:nth-child(8) { top: 40%; animation-delay: 0.21s; }
-.scan-line:nth-child(9) { top: 45%; animation-delay: 0.24s; }
-.scan-line:nth-child(10) { top: 50%; animation-delay: 0.27s; }
-.scan-line:nth-child(11) { top: 55%; animation-delay: 0.30s; }
-.scan-line:nth-child(12) { top: 60%; animation-delay: 0.33s; }
-.scan-line:nth-child(13) { top: 65%; animation-delay: 0.36s; }
-.scan-line:nth-child(14) { top: 70%; animation-delay: 0.39s; }
-.scan-line:nth-child(15) { top: 75%; animation-delay: 0.42s; }
-.scan-line:nth-child(16) { top: 80%; animation-delay: 0.45s; }
-.scan-line:nth-child(17) { top: 85%; animation-delay: 0.48s; }
-.scan-line:nth-child(18) { top: 90%; animation-delay: 0.51s; }
-.scan-line:nth-child(19) { top: 95%; animation-delay: 0.54s; }
-
-/* Reveal Text Animation */
 .reveal-text {
-  text-align: center;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 10;
+  animation: textReveal 0.8s ease-out;
 }
 
-.reveal-text.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.portfolio-title {
+.reveal-text h1 {
   font-size: 48px;
   font-weight: 800;
-  letter-spacing: 15px;
+  letter-spacing: 10px;
   background: linear-gradient(135deg, #e50914, #ff4d4d);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   margin-bottom: 20px;
-  animation: titleGlow 1.5s ease;
 }
 
-@keyframes titleGlow {
-  0% {
-    letter-spacing: 30px;
-    opacity: 0;
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
-  }
-  100% {
-    letter-spacing: 15px;
-    opacity: 1;
-  }
-}
-
-.portfolio-subtitle {
+.reveal-text p {
   font-size: 18px;
   color: #b3b3b3;
-  letter-spacing: 5px;
-  font-weight: 300;
+  letter-spacing: 3px;
 }
 
-/* Sound Visualizer */
-.sound-visualizer {
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 20;
-}
-
-.sound-visualizer.active {
-  opacity: 0.8;
-  animation: visualizerPulse 1s ease-in-out infinite;
-}
-
-.visualizer-bar {
-  width: 4px;
-  height: 20px;
-  background: #e50914;
-  border-radius: 2px;
-  animation: soundBar 0.5s ease-in-out infinite alternate;
-}
-
-.visualizer-bar:nth-child(1) { animation-delay: 0s; height: 15px; }
-.visualizer-bar:nth-child(2) { animation-delay: 0.1s; height: 30px; }
-.visualizer-bar:nth-child(3) { animation-delay: 0.2s; height: 45px; }
-.visualizer-bar:nth-child(4) { animation-delay: 0.3s; height: 30px; }
-.visualizer-bar:nth-child(5) { animation-delay: 0.4s; height: 15px; }
-
-@keyframes soundBar {
-  0% {
-    height: 10px;
-  }
-  100% {
-    height: 50px;
-  }
-}
-
-@keyframes visualizerPulse {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .hb-logo-netflix {
-    font-size: 60px;
-    gap: 10px;
-  }
-  
-  .portfolio-title {
-    font-size: 28px;
-    letter-spacing: 8px;
-  }
-  
-  .portfolio-subtitle {
-    font-size: 12px;
-    letter-spacing: 3px;
-  }
-}
-
-/* Start Screen */
-.start-screen {
-  text-align: center;
-  animation: fadeIn 1s ease;
-}
-
-.start-button {
-  background: #e50914;
-  color: white;
-  border: none;
-  padding: 15px 40px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  margin: 20px 0;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.start-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
-}
-
-.start-hint {
-  color: #666;
-  font-size: 14px;
-  letter-spacing: 2px;
-}
-
-@keyframes fadeIn {
+@keyframes textReveal {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .h-letter, .b-letter {
+    font-size: 50px;
+  }
+  
+  .reveal-text h1 {
+    font-size: 28px;
+    letter-spacing: 5px;
+  }
+  
+  .reveal-text p {
+    font-size: 12px;
+    letter-spacing: 2px;
   }
 }
