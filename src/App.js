@@ -6,7 +6,6 @@ import {
   SiUnity, 
   SiMongodb, 
   SiExpress, 
-  SiNodedotjs, 
   SiPhp, 
   SiDart, 
   SiTypescript, 
@@ -16,19 +15,10 @@ import {
   SiJavascript,
   SiHtml5,
   SiGit,
-  SiDocker,
   SiMysql,
-  SiPostgresql,
-  SiRedis,
-  SiGraphql,
-  SiKubernetes,
-  SiJenkins,
-  SiTerraform,
-  SiAnsible,
-  SiPrometheus,
-  SiGrafana
+  SiPostgresql
 } from 'react-icons/si';
-import { FaNodeJs, FaCss3Alt, FaAws } from 'react-icons/fa';
+import { FaNodeJs, FaCss3Alt } from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -72,18 +62,8 @@ function App() {
     { name: "HTML5", icon: SiHtml5, color: "#e34f26" },
     { name: "CSS3", icon: FaCss3Alt, color: "#1572b6" },
     { name: "Git", icon: SiGit, color: "#f05032" },
-    { name: "Docker", icon: SiDocker, color: "#2496ed" },
     { name: "MySQL", icon: SiMysql, color: "#4479a1" },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
-    { name: "Redis", icon: SiRedis, color: "#dc382d" },
-    { name: "GraphQL", icon: SiGraphql, color: "#e10098" },
-    { name: "AWS", icon: FaAws, color: "#ff9900" },
-    { name: "Kubernetes", icon: SiKubernetes, color: "#326ce5" },
-    { name: "Jenkins", icon: SiJenkins, color: "#d33833" },
-    { name: "Terraform", icon: SiTerraform, color: "#7b42bc" },
-    { name: "Ansible", icon: SiAnsible, color: "#ee0000" },
-    { name: "Prometheus", icon: SiPrometheus, color: "#e6522c" },
-    { name: "Grafana", icon: SiGrafana, color: "#f46800" }
+    { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" }
   ];
 
   const featuredProjects = [
@@ -101,9 +81,10 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="nav-container">
-          <button className="logo" onClick={() => setCurrentPage('home')}>HB<span>_PORTFOLIO</span></button>
+          <button className="logo" onClick={() => setCurrentPage('home')}>PORTFOLIO</button>
           <div className="nav-links">
             <button onClick={() => setCurrentPage('home')}>Home</button>
+            <button onClick={() => setCurrentPage('techStack')}>Tech Stack</button>
             <button onClick={() => setCurrentPage('projects')}>Projects</button>
             <button onClick={() => setCurrentPage('contact')}>Contact</button>
             <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer" className="github-btn">GitHub</a>
@@ -143,23 +124,6 @@ function App() {
             </div>
           </div>
           
-          <div className="section">
-            <h2>Tech Stack & Skills</h2>
-            <div className="skills-grid">
-              {skills.map(skill => {
-                const IconComponent = skill.icon;
-                return (
-                  <div key={skill.name} className="skill-card" style={{ borderLeftColor: skill.color }}>
-                    <div className="skill-icon">
-                      <IconComponent style={{ color: skill.color, fontSize: '2rem' }} />
-                    </div>
-                    <span className="skill-name">{skill.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          
           <div className="github-section">
             <h2><i className="fab fa-github"></i> GitHub Stats</h2>
             <div className="github-stats">
@@ -185,6 +149,30 @@ function App() {
               <a href="https://github.com/HimadriBh28" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="mailto:himadribhardwaj56@gmail.com">Email</a>
               <button onClick={() => window.open('#', '_blank')}>LinkedIn</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {currentPage === 'techStack' && (
+        <div>
+          <div className="page-header">
+            <h1>Tech Stack & Skills</h1>
+            <p>Technologies I work with</p>
+          </div>
+          <div className="section">
+            <div className="skills-grid">
+              {skills.map(skill => {
+                const IconComponent = skill.icon;
+                return (
+                  <div key={skill.name} className="skill-card" style={{ borderLeftColor: skill.color }}>
+                    <div className="skill-icon">
+                      <IconComponent style={{ color: skill.color, fontSize: '2rem' }} />
+                    </div>
+                    <span className="skill-name">{skill.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
