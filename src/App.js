@@ -4,6 +4,8 @@ import PriyanshiEasterEgg from './components/PriyanshiEasterEgg';
 import MeenakshiEasterEgg from './components/MeenakshiEasterEgg';
 import VineetEasterEgg from './components/VineetEasterEgg';
 import ResumeDownload from './components/ResumeDownload';
+import DesignShowcase from './components/DesignShowcase';
+import DesignsGallery from './components/DesignsGallery';
 import { 
   SiFlutter, 
   SiReact, 
@@ -96,7 +98,7 @@ function App() {
       tech: ["Unity", "C#", "ShaderLab"], 
       year: "2023", 
       link: "https://github.com/HimadriBh28/DodgeIt-",
-      icon: "🎮",
+      icon: "��",
       featured: true
     },
     { 
@@ -197,6 +199,8 @@ function App() {
             </div>
           </div>
           
+          <DesignShowcase />
+          
           <div className="github-section">
             <h2><i className="fab fa-github"></i> GitHub Stats</h2>
             <div className="github-stats">
@@ -279,6 +283,9 @@ function App() {
               </div>
             </div>
           </div>
+          
+          {/* Designs Gallery - Floating below education */}
+          <DesignsGallery />
         </div>
       )}
 
@@ -334,7 +341,6 @@ function App() {
         </div>
       )}
 
-      {/* Experience Modal */}
       {showExperience && (
         <div className="experience-modal-overlay" onClick={() => setShowExperience(false)}>
           <div className="experience-modal" onClick={(e) => e.stopPropagation()}>
