@@ -34,17 +34,6 @@ const LeetCodeStats = () => {
   const hardPercent = (stats.hardSolved / stats.hardTotal) * 100;
   const overallPercent = (stats.totalSolved / stats.totalProblems) * 100;
 
-  // Months for activity calendar
-  const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
-  
-  // Activity data (simulated based on your streak)
-  const activityData = [
-    { week: 1, days: [15, 20, 18, 25, 30, 28, 22] },
-    { week: 2, days: [20, 25, 22, 28, 32, 30, 25] },
-    { week: 3, days: [18, 22, 20, 26, 28, 25, 20] },
-    { week: 4, days: [22, 28, 25, 30, 35, 32, 28] }
-  ];
-
   return (
     <div className="leetcode-section">
       <div className="leetcode-header">
@@ -146,40 +135,6 @@ const LeetCodeStats = () => {
               <span className="summary-label">Max Streak</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Activity Calendar */}
-      <div className="leetcode-calendar">
-        <h3>Activity Calendar</h3>
-        <div className="calendar-months">
-          {months.map((month, idx) => (
-            <span key={idx} className="calendar-month">{month}</span>
-          ))}
-        </div>
-        <div className="calendar-grid">
-          {activityData.map((week, weekIdx) => (
-            <div key={weekIdx} className="calendar-week">
-              {week.days.map((activity, dayIdx) => (
-                <div 
-                  key={dayIdx} 
-                  className={`calendar-day level-${Math.min(4, Math.floor(activity / 10))}`}
-                  title={`${activity} submissions`}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="calendar-legend">
-          <span>Less</span>
-          <div className="legend-colors">
-            <div className="legend-color level-0" />
-            <div className="legend-color level-1" />
-            <div className="legend-color level-2" />
-            <div className="legend-color level-3" />
-            <div className="legend-color level-4" />
-          </div>
-          <span>More</span>
         </div>
       </div>
 
