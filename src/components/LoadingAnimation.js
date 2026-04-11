@@ -2,96 +2,100 @@ import React, { useEffect, useState, useRef } from 'react';
 import './LoadingAnimation.css';
 
 const LoadingAnimation = ({ onComplete }) => {
-  const [animationState, setAnimationState] = useState('loading');
-  const [showEnterButton, setShowEnterButton] = useState(false);
+  const [animationStage, setAnimationStage] = useState(0);
+  const [needsClick, setNeedsClick] = useState(false);
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    // Create audio instance
-    audioRef.current = new Audio('/audio/tudum.mp3');
-    audioRef.current.volume = 0.6;
-    audioRef.current.load();
-
-    // Start animation
-    setTimeout(() => setAnimationState('logo'), 100);
+  const startAnimation = () => {
+    // Play sound
+    if (audioRef.current) {
+      audioRef.current.play().catch(e => console.log('Play error:', e));
+    }
     
-    // Try to play sound
-    const tryPlaySound = () => {
-      if (audioRef.current) {
-        audioRef.current.play()
-          .then(() => {
-            console.log('Tudum sound playing!');
-          })
-          .catch(() => {
-            console.log('Browser requires user interaction');
-            setShowEnterButton(true);
-          });
+    // Start animation
+    setAnimationStage(1);
+    setTimeout(() => setAnimationStage(2), 300);
+    setTimeout(() => setAnimationStage(3), 800);
+    setTimeout(() => setAnimationStage(4), 1000);
+    setTimeout(() => setAnimationStage(5), 1800);
+    setTimeout(() => {
+      setAnimationStage(6);
+      setTimeout(() => onComplete(), 800);
+    }, 2800);
+  };
+
+  useEffect(() => {
+    // Create audio element
+    audioRef.current = new Audio('/audio/netflix-tudum-sfx-n-c.mp3');
+    audioRef.current.volume = 0.7;
+    audioRef.current.load();
+    
+    // Try to autoplay
+    const tryAutoplay = async () => {
+      try {
+        await audioRef.current.play();
+        startAnimation();
+      } catch (error) {
+        console.log('Autoplay prevented, showing start button');
+        setNeedsClick(true);
+        setAnimationStage(0);
       }
     };
     
-    setTimeout(tryPlaySound, 200);
-    setTimeout(() => setAnimationState('split'), 800);
-    setTimeout(() => setAnimationState('lines'), 1200);
-    setTimeout(() => setAnimationState('reveal'), 1800);
+    tryAutoplay();
     
-    const completeTimer = setTimeout(() => {
-      setAnimationState('complete');
-      setTimeout(onComplete, 500);
-    }, 2500);
-
     return () => {
-      clearTimeout(completeTimer);
       if (audioRef.current) {
         audioRef.current.pause();
       }
     };
-  }, [onComplete]);
+  }, []);
 
-  const handleEnterClick = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
-    setShowEnterButton(false);
-    // Complete the animation
-    setAnimationState('complete');
-    setTimeout(onComplete, 500);
-  };
+  if (needsClick) {
+    return (
+      <div className="netflix-loader">
+        <div className="start-screen">
+          <div className="hb-logo-netflix" style={{ fontSize: '80px', marginBottom: '40px' }}>
+            <span className="hb-h">H</span>
+            <span className="hb-b">B</span>
+          </div>
+          <button className="start-button" onClick={startAnimation}>
+            <i className="fas fa-play"></i> START
+          </button>
+          <p className="start-hint">Click anywhere to begin</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className={`loading-screen ${animationState === 'complete' ? 'fade-out' : ''}`}>
-      <div className="loading-content">
-        <div className={`hb-logo ${animationState === 'logo' ? 'show' : ''}`}>
-          <span className="hb-letter">H</span>
-          <span className="hb-letter">B</span>
+    <div className={`netflix-loader ${animationStage >= 5 ? 'fade-out' : ''}`}>
+      <div className={`red-flash ${animationStage >= 2 ? 'active' : ''}`}></div>
+      
+      <div className={`hb-container ${animationStage >= 1 ? 'show' : ''}`}>
+        <div className="hb-logo-netflix">
+          <span className="hb-h">H</span>
+          <span className="hb-b">B</span>
         </div>
-        
-        <div className={`split-animation ${animationState === 'split' ? 'active' : ''}`}>
-          <div className="split-line left"></div>
-          <div className="split-line right"></div>
-        </div>
-        
-        <div className={`lines-animation ${animationState === 'lines' ? 'active' : ''}`}>
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className={`line line-${i}`} style={{ animationDelay: `${i * 0.05}s` }}></div>
-          ))}
-        </div>
-        
-        <div className={`reveal-content ${animationState === 'reveal' ? 'active' : ''}`}>
-          <div className="netflix-text">PORTFOLIO</div>
-          <div className="subtitle">Himadri Bhardwaj</div>
-        </div>
-        
-        {showEnterButton && (
-          <button className="enter-button" onClick={handleEnterClick}>
-            Click to Enter <i className="fas fa-play"></i>
-          </button>
-        )}
       </div>
       
-      <div className="sound-wave">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div className={`scan-lines ${animationStage >= 3 ? 'active' : ''}`}>
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className="scan-line"></div>
+        ))}
+      </div>
+      
+      <div className={`reveal-text ${animationStage >= 4 ? 'active' : ''}`}>
+        <h1 className="portfolio-title">PORTFOLIO</h1>
+        <p className="portfolio-subtitle">Himadri Bhardwaj</p>
+      </div>
+      
+      <div className={`sound-visualizer ${animationStage >= 2 && animationStage < 5 ? 'active' : ''}`}>
+        <div className="visualizer-bar"></div>
+        <div className="visualizer-bar"></div>
+        <div className="visualizer-bar"></div>
+        <div className="visualizer-bar"></div>
+        <div className="visualizer-bar"></div>
       </div>
     </div>
   );

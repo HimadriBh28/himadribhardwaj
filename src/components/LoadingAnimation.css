@@ -1,250 +1,326 @@
-.loading-screen {
+.netflix-loader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: #000000;
-  z-index: 9999;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s ease;
+  transition: opacity 0.8s ease;
 }
 
-.loading-screen.fade-out {
+.netflix-loader.fade-out {
   opacity: 0;
   pointer-events: none;
 }
 
-.loading-content {
-  text-align: center;
+/* Red Flash Effect (Netflix style) */
+.red-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e50914;
+  opacity: 0;
+  transition: opacity 0.01s;
+  pointer-events: none;
 }
 
-/* HB Logo Animation */
-.hb-logo {
+.red-flash.active {
+  animation: netflixFlash 0.6s ease-out forwards;
+}
+
+@keyframes netflixFlash {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* HB Logo Container */
+.hb-container {
   opacity: 0;
   transform: scale(3);
-  transition: all 0.5s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
 }
 
-.hb-logo.show {
+.hb-container.show {
   opacity: 1;
   transform: scale(1);
 }
 
-.hb-letter {
-  font-size: 6rem;
-  font-weight: 800;
-  display: inline-block;
-  animation: letterGlow 1s ease;
+.hb-logo-netflix {
+  display: flex;
+  gap: 20px;
+  font-size: 120px;
+  font-weight: 900;
+  letter-spacing: -5px;
 }
 
-.hb-letter:first-child {
+.hb-h {
   color: #e50914;
-  animation-delay: 0s;
+  text-shadow: 0 0 50px rgba(229, 9, 20, 0.5);
+  animation: hbPulse 0.8s ease;
 }
 
-.hb-letter:last-child {
+.hb-b {
   color: #ffffff;
-  animation-delay: 0.2s;
+  text-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+  animation: hbPulse 0.8s ease 0.1s;
 }
 
-@keyframes letterGlow {
+@keyframes hbPulse {
   0% {
-    text-shadow: 0 0 0px rgba(229, 9, 20, 0);
     transform: scale(0.5);
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
-    transform: scale(1.2);
-  }
-  100% {
-    text-shadow: 0 0 0px rgba(229, 9, 20, 0);
-    transform: scale(1);
-  }
-}
-
-/* Split Animation - HB splitting into lines */
-.split-animation {
-  position: relative;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.split-animation.active {
-  opacity: 1;
-}
-
-.split-line {
-  position: absolute;
-  top: 50%;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #e50914, #ffffff);
-  animation: splitExpand 0.6s ease forwards;
-}
-
-.split-line.left {
-  left: 50%;
-  transform: translateX(-100%);
-  animation-delay: 0s;
-}
-
-.split-line.right {
-  right: 50%;
-  transform: translateX(100%);
-  animation-delay: 0.3s;
-}
-
-@keyframes splitExpand {
-  to {
-    width: 200px;
-  }
-}
-
-/* Lines Animation - Multiple lines forming */
-.lines-animation {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.lines-animation.active {
-  opacity: 1;
-}
-
-.line {
-  position: absolute;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #e50914, transparent);
-  animation: lineMove 0.8s ease forwards;
-}
-
-@keyframes lineMove {
-  0% {
-    width: 0;
     opacity: 0;
   }
   50% {
-    width: 100px;
+    transform: scale(1.2);
+    text-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Netflix Scanning Lines */
+.scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+}
+
+.scan-lines.active {
+  opacity: 1;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(229, 9, 20, 0.8) 50%, 
+    transparent 100%
+  );
+  animation: scanMove 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
     opacity: 1;
   }
   100% {
-    width: 0;
+    transform: translateX(100%);
     opacity: 0;
   }
 }
 
-/* Generate 20 lines at different positions */
-.line-0 { top: 10%; left: 20%; animation-delay: 0s; }
-.line-1 { top: 15%; left: 40%; animation-delay: 0.05s; }
-.line-2 { top: 20%; left: 60%; animation-delay: 0.1s; }
-.line-3 { top: 25%; left: 30%; animation-delay: 0.15s; }
-.line-4 { top: 30%; left: 50%; animation-delay: 0.2s; }
-.line-5 { top: 35%; left: 70%; animation-delay: 0.25s; }
-.line-6 { top: 40%; left: 25%; animation-delay: 0.3s; }
-.line-7 { top: 45%; left: 45%; animation-delay: 0.35s; }
-.line-8 { top: 50%; left: 65%; animation-delay: 0.4s; }
-.line-9 { top: 55%; left: 35%; animation-delay: 0.45s; }
-.line-10 { top: 60%; left: 55%; animation-delay: 0.5s; }
-.line-11 { top: 65%; left: 75%; animation-delay: 0.55s; }
-.line-12 { top: 70%; left: 15%; animation-delay: 0.6s; }
-.line-13 { top: 75%; left: 85%; animation-delay: 0.65s; }
-.line-14 { top: 80%; left: 45%; animation-delay: 0.7s; }
-.line-15 { top: 85%; left: 25%; animation-delay: 0.75s; }
-.line-16 { top: 90%; left: 65%; animation-delay: 0.8s; }
-.line-17 { top: 95%; left: 35%; animation-delay: 0.85s; }
-.line-18 { top: 50%; left: 80%; animation-delay: 0.9s; }
-.line-19 { top: 30%; left: 10%; animation-delay: 0.95s; }
+/* Generate scan lines at different positions */
+.scan-line:nth-child(1) { top: 5%; animation-delay: 0s; }
+.scan-line:nth-child(2) { top: 10%; animation-delay: 0.03s; }
+.scan-line:nth-child(3) { top: 15%; animation-delay: 0.06s; }
+.scan-line:nth-child(4) { top: 20%; animation-delay: 0.09s; }
+.scan-line:nth-child(5) { top: 25%; animation-delay: 0.12s; }
+.scan-line:nth-child(6) { top: 30%; animation-delay: 0.15s; }
+.scan-line:nth-child(7) { top: 35%; animation-delay: 0.18s; }
+.scan-line:nth-child(8) { top: 40%; animation-delay: 0.21s; }
+.scan-line:nth-child(9) { top: 45%; animation-delay: 0.24s; }
+.scan-line:nth-child(10) { top: 50%; animation-delay: 0.27s; }
+.scan-line:nth-child(11) { top: 55%; animation-delay: 0.30s; }
+.scan-line:nth-child(12) { top: 60%; animation-delay: 0.33s; }
+.scan-line:nth-child(13) { top: 65%; animation-delay: 0.36s; }
+.scan-line:nth-child(14) { top: 70%; animation-delay: 0.39s; }
+.scan-line:nth-child(15) { top: 75%; animation-delay: 0.42s; }
+.scan-line:nth-child(16) { top: 80%; animation-delay: 0.45s; }
+.scan-line:nth-child(17) { top: 85%; animation-delay: 0.48s; }
+.scan-line:nth-child(18) { top: 90%; animation-delay: 0.51s; }
+.scan-line:nth-child(19) { top: 95%; animation-delay: 0.54s; }
 
-/* Reveal Content */
-.reveal-content {
+/* Reveal Text Animation */
+.reveal-text {
+  text-align: center;
   opacity: 0;
   transform: scale(0.8);
-  transition: all 0.8s ease;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 10;
 }
 
-.reveal-content.active {
+.reveal-text.active {
   opacity: 1;
   transform: scale(1);
 }
 
-.netflix-text {
-  font-size: 3rem;
+.portfolio-title {
+  font-size: 48px;
   font-weight: 800;
-  letter-spacing: 10px;
+  letter-spacing: 15px;
   background: linear-gradient(135deg, #e50914, #ff4d4d);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: textReveal 1s ease;
+  margin-bottom: 20px;
+  animation: titleGlow 1.5s ease;
 }
 
-.subtitle {
-  font-size: 1rem;
-  color: #b3b3b3;
-  margin-top: 1rem;
-  letter-spacing: 2px;
-}
-
-@keyframes textReveal {
-  from {
+@keyframes titleGlow {
+  0% {
+    letter-spacing: 30px;
     opacity: 0;
-    transform: translateY(20px);
   }
-  to {
+  50% {
+    text-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+  }
+  100% {
+    letter-spacing: 15px;
     opacity: 1;
-    transform: translateY(0);
+  }
+}
+
+.portfolio-subtitle {
+  font-size: 18px;
+  color: #b3b3b3;
+  letter-spacing: 5px;
+  font-weight: 300;
+}
+
+/* Sound Visualizer */
+.sound-visualizer {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 20;
+}
+
+.sound-visualizer.active {
+  opacity: 0.8;
+  animation: visualizerPulse 1s ease-in-out infinite;
+}
+
+.visualizer-bar {
+  width: 4px;
+  height: 20px;
+  background: #e50914;
+  border-radius: 2px;
+  animation: soundBar 0.5s ease-in-out infinite alternate;
+}
+
+.visualizer-bar:nth-child(1) { animation-delay: 0s; height: 15px; }
+.visualizer-bar:nth-child(2) { animation-delay: 0.1s; height: 30px; }
+.visualizer-bar:nth-child(3) { animation-delay: 0.2s; height: 45px; }
+.visualizer-bar:nth-child(4) { animation-delay: 0.3s; height: 30px; }
+.visualizer-bar:nth-child(5) { animation-delay: 0.4s; height: 15px; }
+
+@keyframes soundBar {
+  0% {
+    height: 10px;
+  }
+  100% {
+    height: 50px;
+  }
+}
+
+@keyframes visualizerPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .hb-letter {
-    font-size: 3rem;
+  .hb-logo-netflix {
+    font-size: 60px;
+    gap: 10px;
   }
   
-  .netflix-text {
-    font-size: 1.5rem;
-    letter-spacing: 5px;
+  .portfolio-title {
+    font-size: 28px;
+    letter-spacing: 8px;
   }
   
-  .split-line.left, .split-line.right {
-    width: 100px;
+  .portfolio-subtitle {
+    font-size: 12px;
+    letter-spacing: 3px;
   }
 }
 
-/* Enter Button */
-.enter-button {
-  position: fixed;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
+/* Start Screen */
+.start-screen {
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.start-button {
   background: #e50914;
   color: white;
   border: none;
-  padding: 12px 30px;
-  font-size: 1.1rem;
+  padding: 15px 40px;
+  font-size: 18px;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 50px;
   cursor: pointer;
-  z-index: 10000;
-  animation: buttonPulse 1.5s ease-in-out infinite;
-  display: flex;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.enter-button:hover {
-  background: #ff0a1a;
-  transform: translateX(-50%) scale(1.05);
+.start-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
 }
 
-@keyframes buttonPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+.start-hint {
+  color: #666;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  50% {
-    box-shadow: 0 0 0 15px rgba(229, 9, 20, 0);
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
