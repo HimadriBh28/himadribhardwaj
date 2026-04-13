@@ -1,0 +1,184 @@
+.infinite-scroll-container {
+  margin: 4rem 0;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.infinite-scroll-container::before,
+.infinite-scroll-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e50914, transparent);
+}
+
+.infinite-scroll-container::before {
+  top: 0;
+}
+
+.infinite-scroll-container::after {
+  bottom: 0;
+}
+
+.infinite-scroll-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.infinite-scroll-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #e50914, #ff4d4d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.infinite-scroll-header p {
+  color: #b3b3b3;
+  font-size: 1rem;
+}
+
+/* Marquee Wrapper */
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.marquee-scroll {
+  display: flex;
+  gap: 1.5rem;
+  width: fit-content;
+  animation: scrollProjects 35s linear infinite;
+}
+
+.marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollProjects {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Project Cards */
+.project-scroll-card {
+  flex-shrink: 0;
+  width: 300px;
+  background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.project-scroll-card:hover {
+  transform: scale(1.05);
+  border-color: #e50914;
+  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+}
+
+.project-scroll-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.project-scroll-title {
+  color: #e50914;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.project-scroll-desc {
+  color: #b3b3b3;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.project-scroll-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
+}
+
+.tech-scroll-tag {
+  background: #2c2c2c;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  color: #e5e5e5;
+}
+
+.project-scroll-link {
+  color: #e50914;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.3s ease;
+  margin-top: 0.3rem;
+}
+
+.project-scroll-link:hover {
+  gap: 0.6rem;
+}
+
+.infinite-scroll-footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.infinite-scroll-footer p {
+  color: #e50914;
+  font-size: 0.85rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .project-scroll-card {
+    width: 260px;
+    padding: 1rem;
+  }
+  
+  .infinite-scroll-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .project-scroll-title {
+    font-size: 1rem;
+  }
+  
+  .project-scroll-desc {
+    font-size: 0.75rem;
+  }
+}

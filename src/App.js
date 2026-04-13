@@ -4,8 +4,7 @@ import PriyanshiEasterEgg from './components/PriyanshiEasterEgg';
 import MeenakshiEasterEgg from './components/MeenakshiEasterEgg';
 import VineetEasterEgg from './components/VineetEasterEgg';
 import ResumeDownload from './components/ResumeDownload';
-import DesignShowcase from './components/DesignShowcase';
-import DesignsGallery from './components/DesignsGallery';
+import InfiniteProjectScroll from './components/InfiniteProjectScroll';
 import LeetCodeStats from './components/LeetCodeStats';
 import { 
   SiFlutter, 
@@ -74,74 +73,6 @@ function App() {
     { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" }
   ];
 
-  const allProjects = [
-    { 
-      name: "MusicBoard", 
-      desc: "A Flutter music app that lets users rate and review albums.", 
-      tech: ["Flutter", "Dart", "Firebase"], 
-      year: "2024", 
-      link: "https://github.com/HimadriBh28/MusicBoard",
-      icon: "🎵",
-      featured: true
-    },
-    { 
-      name: "movie_review_app", 
-      desc: "React Native app for reviewing movies with ratings and comments.", 
-      tech: ["React Native", "TypeScript", "Node.js"], 
-      year: "2024", 
-      link: "https://github.com/HimadriBh28/movie_review_app",
-      icon: "🎬",
-      featured: true
-    },
-    { 
-      name: "DodgeIt! Game", 
-      desc: "My first Unity game where players navigate through obstacles.", 
-      tech: ["Unity", "C#", "ShaderLab"], 
-      year: "2023", 
-      link: "https://github.com/HimadriBh28/DodgeIt-",
-      icon: "🎮",
-      featured: true
-    },
-    { 
-      name: "AlumniConnect", 
-      desc: "Full-stack alumni management platform connecting graduates with current students.", 
-      tech: ["MongoDB", "Express.js", "React", "Node.js"], 
-      year: "2024", 
-      link: "https://github.com/HimadriBh28/AlumniConnect",
-      icon: "👥",
-      featured: true
-    },
-    { 
-      name: "Secure Login System", 
-      desc: "Secure authentication system built with PHP and MySQL.", 
-      tech: ["PHP", "MySQL", "HTML/CSS"], 
-      year: "2023", 
-      link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
-      icon: "🔐",
-      featured: false
-    },
-    { 
-      name: "Duplicate Cleaner", 
-      desc: "UNIX tool to scan and clean duplicate files efficiently.", 
-      tech: ["Shell", "Bash", "UNIX"], 
-      year: "2023", 
-      link: "https://github.com/HimadriBh28/DuplicateCleanerProject",
-      icon: "🧹",
-      featured: false
-    },
-    { 
-      name: "JYC Website", 
-      desc: "Website project with photo updates and dynamic content management.", 
-      tech: ["HTML", "CSS", "JavaScript"], 
-      year: "2024", 
-      link: "https://github.com/HimadriBh28/jyc-website",
-      icon: "🌐",
-      featured: false
-    }
-  ];
-
-  const featuredProjects = allProjects.filter(p => p.featured);
-
   if (!hasEntered) {
     return <EntryScreen onEnter={() => setHasEntered(true)} />;
   }
@@ -179,28 +110,7 @@ function App() {
             </div>
           </div>
           
-          <div className="section projects-section">
-            <h2>Featured Projects</h2>
-            <div className="projects-grid">
-              {featuredProjects.map(project => (
-                <div key={project.name} className="project-card">
-                  <div className="project-icon" style={{ fontSize: '2.5rem' }}>{project.icon}</div>
-                  <h3>{project.name}</h3>
-                  <p>{project.desc}</p>
-                  <div className="project-tech">
-                    {project.tech.map(tech => (
-                      <span key={tech} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="github-link-btn" style={{ marginTop: '1rem' }}>
-                    View on GitHub
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <DesignShowcase />
+          <InfiniteProjectScroll />
           
           <div className="github-section">
             <h2><i className="fab fa-github"></i> GitHub Stats</h2>
@@ -286,8 +196,6 @@ function App() {
               </div>
             </div>
           </div>
-          
-          <DesignsGallery />
         </div>
       )}
 
@@ -299,24 +207,7 @@ function App() {
           </div>
           <div className="section">
             <div className="projects-grid">
-              {allProjects.map(project => (
-                <div key={project.name} className="project-card large">
-                  <div className="project-icon" style={{ fontSize: '2rem' }}>{project.icon}</div>
-                  <h3>{project.name}</h3>
-                  <p>{project.desc}</p>
-                  <div className="project-meta">
-                    <div className="project-tech">
-                      {project.tech.map(tech => (
-                        <span key={tech} className="tech-tag">{tech}</span>
-                      ))}
-                    </div>
-                    <span className="year">{project.year}</span>
-                  </div>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="github-link-btn">
-                    View on GitHub
-                  </a>
-                </div>
-              ))}
+              <InfiniteProjectScroll />
             </div>
           </div>
         </div>
