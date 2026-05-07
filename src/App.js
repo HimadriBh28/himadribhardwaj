@@ -73,6 +73,66 @@ function App() {
     { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" }
   ];
 
+  // All projects for the Projects page grid
+  const allProjectsGrid = [
+    { 
+      name: "MusicBoard", 
+      desc: "A Flutter music app that lets users rate and review albums. Features include user authentication, album database, and rating system.", 
+      tech: ["Flutter", "Dart", "Firebase"], 
+      year: "2024", 
+      link: "https://github.com/HimadriBh28/MusicBoard",
+      icon: "🎵"
+    },
+    { 
+      name: "movie_review_app", 
+      desc: "React Native app for reviewing movies with ratings and comments. Real-time updates and user profiles.", 
+      tech: ["React Native", "TypeScript", "Node.js"], 
+      year: "2024", 
+      link: "https://github.com/HimadriBh28/movie_review_app",
+      icon: "🎬"
+    },
+    { 
+      name: "DodgeIt! Game", 
+      desc: "My first Unity game where players navigate through obstacles. Built with C# and Unity Engine.", 
+      tech: ["Unity", "C#", "ShaderLab"], 
+      year: "2023", 
+      link: "https://github.com/HimadriBh28/DodgeIt-",
+      icon: "🎮"
+    },
+    { 
+      name: "AlumniConnect", 
+      desc: "Full-stack alumni management platform connecting graduates with current students. Features user profiles, messaging, and event management.", 
+      tech: ["MongoDB", "Express.js", "React", "Node.js"], 
+      year: "2024", 
+      link: "https://github.com/HimadriBh28/AlumniConnect",
+      icon: "👥"
+    },
+    { 
+      name: "Secure Login System", 
+      desc: "Secure authentication system built with PHP and MySQL with session management and password hashing.", 
+      tech: ["PHP", "MySQL", "HTML/CSS", "JavaScript"], 
+      year: "2023", 
+      link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
+      icon: "��"
+    },
+    { 
+      name: "Duplicate Cleaner", 
+      desc: "UNIX tool to scan and clean duplicate files efficiently using shell scripting. Features recursive scanning and hash-based comparison.", 
+      tech: ["Shell", "Bash", "UNIX"], 
+      year: "2023", 
+      link: "https://github.com/HimadriBh28/DuplicateCleanerProject",
+      icon: "🧹"
+    },
+    { 
+      name: "JYC Website", 
+      desc: "Website project with photo updates and dynamic content management.", 
+      tech: ["HTML", "CSS", "JavaScript"], 
+      year: "2024", 
+      link: "https://github.com/HimadriBh28/jyc-website",
+      icon: "🌐"
+    }
+  ];
+
   if (!hasEntered) {
     return <EntryScreen onEnter={() => setHasEntered(true)} />;
   }
@@ -110,6 +170,7 @@ function App() {
             </div>
           </div>
           
+          {/* Infinite scroll only on home page */}
           <InfiniteProjectScroll />
           
           <div className="github-section">
@@ -168,6 +229,35 @@ function App() {
         </div>
       )}
 
+      {currentPage === 'projects' && (
+        <div>
+          <div className="page-header">
+            <h1>All Projects</h1>
+            <p>Explore my complete portfolio of work</p>
+          </div>
+          <div className="section">
+            <div className="projects-grid-page">
+              {allProjectsGrid.map(project => (
+                <div key={project.name} className="project-card-page">
+                  <div className="project-icon-page" style={{ fontSize: '2.5rem' }}>{project.icon}</div>
+                  <h3 className="project-title-page">{project.name}</h3>
+                  <p className="project-desc-page">{project.desc}</p>
+                  <div className="project-tech-page">
+                    {project.tech.map(tech => (
+                      <span key={tech} className="tech-tag-page">{tech}</span>
+                    ))}
+                  </div>
+                  <div className="project-year-page">{project.year}</div>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link-page">
+                    View on GitHub →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {currentPage === 'education' && (
         <div>
           <div className="page-header">
@@ -194,20 +284,6 @@ function App() {
                 <p className="education-description">Pursuing B.Tech in Computer Science</p>
                 <div className="click-hint">👆 Click to see my experience</div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {currentPage === 'projects' && (
-        <div>
-          <div className="page-header">
-            <h1>All Projects</h1>
-            <p>Explore my complete portfolio of work</p>
-          </div>
-          <div className="section">
-            <div className="projects-grid">
-              <InfiniteProjectScroll />
             </div>
           </div>
         </div>

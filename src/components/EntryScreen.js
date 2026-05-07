@@ -72,7 +72,7 @@ const EntryScreen = ({ onEnter }) => {
         )}
         
         {!isAnimating && (
-          <p className="hint">🔊 CLICK FOR THE REAL NETFLIX TUDUM SOUND 🔊</p>
+          <p className="hint"> CLICK AND ENTER THE PROFILE </p>
         )}
       </div>
     </div>
