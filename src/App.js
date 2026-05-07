@@ -80,7 +80,8 @@ function App() {
       desc: "A Flutter music app that lets users rate and review albums. Features include user authentication, album database, and rating system.", 
       tech: ["Flutter", "Dart", "Firebase"], 
       year: "2024", 
-      link: "https://github.com/HimadriBh28/MusicBoard",
+      github: "https://github.com/HimadriBh28/MusicBoard",
+      demo: null,
       icon: "🎵"
     },
     { 
@@ -88,7 +89,8 @@ function App() {
       desc: "React Native app for reviewing movies with ratings and comments. Real-time updates and user profiles.", 
       tech: ["React Native", "TypeScript", "Node.js"], 
       year: "2024", 
-      link: "https://github.com/HimadriBh28/movie_review_app",
+      github: "https://github.com/HimadriBh28/movie_review_app",
+      demo: null,
       icon: "🎬"
     },
     { 
@@ -96,7 +98,8 @@ function App() {
       desc: "My first Unity game where players navigate through obstacles. Built with C# and Unity Engine.", 
       tech: ["Unity", "C#", "ShaderLab"], 
       year: "2023", 
-      link: "https://github.com/HimadriBh28/DodgeIt-",
+      github: "https://github.com/HimadriBh28/DodgeIt-",
+      demo: null,
       icon: "🎮"
     },
     { 
@@ -104,7 +107,8 @@ function App() {
       desc: "Full-stack alumni management platform connecting graduates with current students. Features user profiles, messaging, and event management.", 
       tech: ["MongoDB", "Express.js", "React", "Node.js"], 
       year: "2024", 
-      link: "https://github.com/HimadriBh28/AlumniConnect",
+      github: "https://github.com/HimadriBh28/AlumniConnect",
+      demo: "https://alumni-management-system.vercel.app",
       icon: "👥"
     },
     { 
@@ -112,15 +116,17 @@ function App() {
       desc: "Secure authentication system built with PHP and MySQL with session management and password hashing.", 
       tech: ["PHP", "MySQL", "HTML/CSS", "JavaScript"], 
       year: "2023", 
-      link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
-      icon: "��"
+      github: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
+      demo: null,
+      icon: "🔐"
     },
     { 
       name: "Duplicate Cleaner", 
       desc: "UNIX tool to scan and clean duplicate files efficiently using shell scripting. Features recursive scanning and hash-based comparison.", 
       tech: ["Shell", "Bash", "UNIX"], 
       year: "2023", 
-      link: "https://github.com/HimadriBh28/DuplicateCleanerProject",
+      github: "https://github.com/HimadriBh28/DuplicateCleanerProject",
+      demo: null,
       icon: "🧹"
     },
     { 
@@ -128,7 +134,8 @@ function App() {
       desc: "Website project with photo updates and dynamic content management.", 
       tech: ["HTML", "CSS", "JavaScript"], 
       year: "2024", 
-      link: "https://github.com/HimadriBh28/jyc-website",
+      github: "https://github.com/HimadriBh28/jyc-website",
+      demo: null,
       icon: "🌐"
     }
   ];
@@ -170,7 +177,6 @@ function App() {
             </div>
           </div>
           
-          {/* Infinite scroll only on home page */}
           <InfiniteProjectScroll />
           
           <div className="github-section">
@@ -248,9 +254,16 @@ function App() {
                     ))}
                   </div>
                   <div className="project-year-page">{project.year}</div>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link-page">
-                    View on GitHub →
-                  </a>
+                  <div className="project-links-page">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link-page">
+                      GitHub →
+                    </a>
+                    {project.demo && (
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-demo-link-page">
+                        Live Demo →
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

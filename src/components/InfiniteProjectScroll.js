@@ -7,49 +7,56 @@ const InfiniteProjectScroll = () => {
       name: "MusicBoard", 
       desc: "Flutter music app to rate and review albums", 
       tech: ["Flutter", "Dart", "Firebase"], 
-      link: "https://github.com/HimadriBh28/MusicBoard",
-      icon: "��"
+      github: "https://github.com/HimadriBh28/MusicBoard",
+      demo: null,
+      icon: "🎵"
     },
     { 
       name: "movie_review_app", 
       desc: "React Native app for reviewing movies with ratings", 
       tech: ["React Native", "TypeScript", "Node.js"], 
-      link: "https://github.com/HimadriBh28/movie_review_app",
-      icon: "��"
+      github: "https://github.com/HimadriBh28/movie_review_app",
+      demo: null,
+      icon: "🎬"
     },
     { 
       name: "DodgeIt! Game", 
       desc: "Unity game where players navigate through obstacles", 
       tech: ["Unity", "C#", "ShaderLab"], 
-      link: "https://github.com/HimadriBh28/DodgeIt-",
+      github: "https://github.com/HimadriBh28/DodgeIt-",
+      demo: null,
       icon: "🎮"
     },
     { 
       name: "AlumniConnect", 
       desc: "Full-stack alumni management platform", 
       tech: ["MongoDB", "Express.js", "React", "Node.js"], 
-      link: "https://github.com/HimadriBh28/AlumniConnect",
+      github: "https://github.com/HimadriBh28/AlumniConnect",
+      demo: "https://alumni-management-system.vercel.app",
       icon: "👥"
     },
     { 
       name: "Secure Login System", 
       desc: "Secure authentication system with PHP", 
       tech: ["PHP", "MySQL", "HTML/CSS"], 
-      link: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
+      github: "https://github.com/HimadriBh28/Team-8-Secure-Login-System",
+      demo: null,
       icon: "🔐"
     },
     { 
       name: "Duplicate Cleaner", 
       desc: "UNIX tool to scan and clean duplicate files", 
       tech: ["Shell", "Bash", "UNIX"], 
-      link: "https://github.com/HimadriBh28/DuplicateCleanerProject",
+      github: "https://github.com/HimadriBh28/DuplicateCleanerProject",
+      demo: null,
       icon: "🧹"
     },
     { 
       name: "JYC Website", 
       desc: "Website with photo updates and dynamic content", 
       tech: ["HTML", "CSS", "JavaScript"], 
-      link: "https://github.com/HimadriBh28/jyc-website",
+      github: "https://github.com/HimadriBh28/jyc-website",
+      demo: null,
       icon: "🌐"
     }
   ];
@@ -76,9 +83,16 @@ const InfiniteProjectScroll = () => {
                   <span key={tech} className="tech-scroll-tag">{tech}</span>
                 ))}
               </div>
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-scroll-link">
-                View on GitHub →
-              </a>
+              <div className="project-scroll-links">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-scroll-link">
+                  GitHub →
+                </a>
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-scroll-demo-link">
+                    Live Demo →
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>

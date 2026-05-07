@@ -990,3 +990,38 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Project Links Container */
+.project-links-page {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-link-page {
+  color: #e50914;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.3s ease;
+}
+
+.project-demo-link-page {
+  color: #4caf50;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.3s ease;
+}
+
+.project-link-page:hover,
+.project-demo-link-page:hover {
+  gap: 0.6rem;
+}
