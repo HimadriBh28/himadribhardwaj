@@ -108,7 +108,7 @@ function App() {
       tech: ["MongoDB", "Express.js", "React", "Node.js"], 
       year: "2024", 
       github: "https://github.com/HimadriBh28/AlumniConnect",
-      demo: "https://alumni-management-system.vercel.app",
+      demo: "https://alumini-management-system.vercel.app",
       icon: "👥"
     },
     { 

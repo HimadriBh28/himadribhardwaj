@@ -32,7 +32,7 @@ const InfiniteProjectScroll = () => {
       desc: "Full-stack alumni management platform", 
       tech: ["MongoDB", "Express.js", "React", "Node.js"], 
       github: "https://github.com/HimadriBh28/AlumniConnect",
-      demo: "https://alumni-management-system.vercel.app",
+      demo: "https://alumini-management-system.vercel.app",
       icon: "👥"
     },
     { 
