@@ -97,6 +97,8 @@ function GameWorld() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-dep
+    
   }, [nearestDoor, sound]);
 
   const saveName = (event) => {
