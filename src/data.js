@@ -9,7 +9,7 @@ export const doors = [
 
 export const facts = [
   
-  "Did you know? I love movies and my Letterboxd ID is @himadriB28 ",
+  "Did you know? I love movies and my Letterboxd ID is @HimadriB28 ",
   "I am a big Formula 1 fan — Carlos Sainz is one of my favourites ",
   "In my free time, I love sketching and making creative designs ",
   "I enjoy building projects that mix AI, design, and storytelling.",
@@ -61,7 +61,7 @@ export const stages = {
   },
   experience: {
     label: "Internship HQ",
-    title: "BISAG-N Experience",
+    title: "Internship Experience",
     bgClass: "stage-experience",
     intro: "This stage covers my AI/ML internship chapter.",
     paragraphs: [
@@ -69,7 +69,7 @@ export const stages = {
       "My current project focus is rooftop detection from satellite imagery, using computer vision and segmentation ideas.",
       "This experience is helping me understand how AI can be used for geospatial and real-world public-impact applications."
     ],
-    cards: ["AI/ML Intern", "BISAG-N", "Satellite Imagery", "Segmentation", "Geospatial AI"]
+    cards: ["AI/ML Intern", "Internship", "Satellite Imagery", "Segmentation", "Geospatial AI"]
   },
   achievements: {
     label: "Trophy Arena",

@@ -51,7 +51,7 @@ function GameWorld() {
 
   const nearestDoor = useMemo(() => {
     const p = { x: player.x + 44, y: player.y + 70 };
-    return doors.find((door) => distance(p, { x: door.x + 48, y: door.y + 92 }) < 120);
+    return doors.find((door) => distance(p, { x: door.x + 90, y: door.y + 90 }) < 180);
   }, [player]);
 
   useEffect(() => {
