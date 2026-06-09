@@ -1,21 +1,45 @@
-function PixelAvatar() {
+import React from "react";
+
+function PixelAvatar({ walking = false, onClick }) {
   return (
-    <div className="avatar" aria-label="Pixel avatar of Himadri">
-      <div className="hair hair-top"></div>
-      <div className="hair hair-left"></div>
-      <div className="hair hair-right"></div>
-      <div className="face">
-        <span className="eye left-eye"></span>
-        <span className="eye right-eye"></span>
-        <span className="smile"></span>
-      </div>
-      <div className="neck"></div>
-      <div className="body"><span className="badge"></span></div>
-      <div className="leg left-leg"></div>
-      <div className="leg right-leg"></div>
-      <div className="shoe left-shoe"></div>
-      <div className="shoe right-shoe"></div>
-    </div>
+    <button
+      className={`pixel-avatar ${walking ? "walking" : ""}`}
+      onClick={onClick}
+      aria-label="Talk to Himadri"
+      type="button"
+    >
+      <span className="avatar-shadow" />
+      <span className="hair hair-volume" />
+      <span className="hair hair-crown" />
+      <span className="hair hair-bangs-one" />
+      <span className="hair hair-bangs-two" />
+      <span className="hair hair-left-lock" />
+      <span className="hair hair-right-lock" />
+      <span className="face">
+        <span className="brow brow-left" />
+        <span className="brow brow-right" />
+        <span className="eye eye-left" />
+        <span className="eye eye-right" />
+        <span className="liner liner-left" />
+        <span className="liner liner-right" />
+        <span className="blush blush-left" />
+        <span className="blush blush-right" />
+        <span className="lip" />
+      </span>
+      <span className="ear ear-left" />
+      <span className="ear ear-right" />
+      <span className="neck" />
+      <span className="jacket" />
+      <span className="top" />
+      <span className="bag-strap" />
+      <span className="arm arm-left" />
+      <span className="arm arm-right" />
+      <span className="jeans" />
+      <span className="leg leg-left" />
+      <span className="leg leg-right" />
+      <span className="shoe shoe-left" />
+      <span className="shoe shoe-right" />
+    </button>
   );
 }
 
