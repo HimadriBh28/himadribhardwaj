@@ -1,72 +1,50 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #111827;
-  color: white;
-  font-family: "Courier New", monospace;
-}
-
-.game-screen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
-    repeating-linear-gradient(
-      45deg,
-      #111827 0px,
-      #111827 20px,
-      #1e293b 20px,
-      #1e293b 40px
-    );
-}
-
-.game-card {
-  width: min(90%, 650px);
-  border: 5px solid #facc15;
-  background: #020617;
-  padding: 40px;
-  text-align: center;
-  box-shadow: 0 0 40px rgba(250, 204, 21, 0.3);
-}
-
-h1 {
-  font-size: 48px;
-  color: #facc15;
-  text-shadow: 4px 4px #7c2d12;
-}
-
-p {
-  font-size: 20px;
-}
-
-.menu {
-  display: grid;
-  gap: 16px;
-  margin-top: 30px;
-}
-
-button {
-  background: #1e293b;
-  color: white;
-  border: 3px solid white;
-  padding: 14px 20px;
-  font-family: "Courier New", monospace;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #facc15;
-  color: #111827;
-}
-
-.hint {
-  margin-top: 30px;
-  color: #94a3b8;
-  font-size: 16px;
-}
+* { box-sizing: border-box; }
+body { margin: 0; color: white; font-family: "Courier New", monospace; }
+button, a { font-family: inherit; }
+.game { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at top, rgba(91,33,182,.45), transparent 35%), linear-gradient(180deg,#020617 0%,#0f172a 55%,#020617 100%); position: relative; overflow: hidden; }
+.scanlines { position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 5px); opacity: .45; z-index: 5; }
+.gameboy { width: min(1100px, 96vw); border: 8px solid #111827; background: #030712; box-shadow: 0 0 0 6px #334155, 0 0 60px rgba(56,189,248,.25); padding: 18px; }
+.top-bar { display: flex; align-items: center; gap: 10px; border: 4px solid #475569; border-bottom: none; padding: 10px 14px; background: #020617; }
+.top-bar p { margin: 0 0 0 auto; color: #67e8f9; letter-spacing: 3px; font-weight: bold; }
+.dot { width: 14px; height: 14px; display: inline-block; border: 2px solid #020617; }
+.red { background: #ef4444; } .yellow { background: #facc15; } .green { background: #22c55e; }
+.screen { min-height: 600px; border: 4px solid #475569; position: relative; overflow: hidden; background: linear-gradient(#020617 0%, #111827 55%, #1e1b4b 56%, #312e81 100%); }
+.moon { position: absolute; top: 46px; right: 80px; width: 78px; height: 78px; background: #fde68a; box-shadow: 0 0 30px rgba(253,230,138,.45); }
+.stars { position: absolute; inset: 0; background-image: radial-gradient(#fff 1px, transparent 1px), radial-gradient(#67e8f9 1px, transparent 1px); background-size: 80px 80px, 130px 130px; background-position: 10px 20px, 45px 70px; opacity: .65; }
+.world { position: relative; height: 350px; }
+.castle { position: absolute; bottom: 56px; right: 80px; width: 190px; height: 170px; }
+.castle-body { position: absolute; bottom: 0; right: 20px; width: 130px; height: 100px; background: #475569; border: 5px solid #94a3b8; box-shadow: inset 0 0 0 8px #334155; }
+.tower { position: absolute; bottom: 0; right: 110px; width: 58px; height: 150px; background: #64748b; border: 5px solid #94a3b8; }
+.tower::before, .tower.small::before { content: ""; position: absolute; top: -34px; left: -5px; width: 58px; height: 34px; background: #7c3aed; border: 5px solid #a78bfa; }
+.tower.small { right: 12px; height: 125px; }
+.floating-block { position: absolute; width: 54px; height: 54px; display: grid; place-items: center; background: #92400e; color: #fde68a; border: 4px solid #f59e0b; box-shadow: inset -6px -6px #78350f; font-size: 26px; font-weight: bold; animation: float 1.8s infinite alternate steps(2); text-decoration: none; z-index: 4; }
+.block-one { left: 120px; top: 92px; } .block-two { left: 210px; top: 56px; } .block-three { left: 300px; top: 92px; }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.avatar { position: absolute; left: 48%; bottom: 42px; width: 92px; height: 150px; transform: translateX(-50%); animation: idle .8s infinite alternate steps(2); z-index: 3; }
+@keyframes idle { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(-5px); } }
+.face { position: absolute; left: 20px; top: 30px; width: 52px; height: 48px; background: #f2c19b; border: 4px solid #2b160f; }
+.hair { position: absolute; background: #111827; border: 4px solid #020617; z-index: 2; }
+.hair-top { left: 14px; top: 12px; width: 64px; height: 28px; } .hair-left { left: 12px; top: 34px; width: 16px; height: 34px; } .hair-right { right: 12px; top: 34px; width: 16px; height: 34px; }
+.eye { position: absolute; top: 18px; width: 7px; height: 7px; background: #020617; } .left-eye { left: 12px; } .right-eye { right: 12px; } .smile { position: absolute; left: 19px; bottom: 10px; width: 14px; height: 5px; background: #7f1d1d; }
+.neck { position: absolute; left: 38px; top: 78px; width: 16px; height: 14px; background: #f2c19b; border-left: 4px solid #2b160f; border-right: 4px solid #2b160f; }
+.body { position: absolute; left: 18px; top: 90px; width: 56px; height: 42px; background: #2563eb; border: 4px solid #93c5fd; box-shadow: inset -8px -8px #1e40af; }
+.badge { position: absolute; top: 8px; right: 9px; width: 9px; height: 9px; background: #facc15; }
+.leg { position: absolute; top: 132px; width: 18px; height: 20px; background: #1e3a8a; border: 3px solid #93c5fd; } .left-leg { left: 24px; } .right-leg { right: 24px; }
+.shoe { position: absolute; bottom: -12px; width: 28px; height: 12px; background: #020617; border: 3px solid #64748b; } .left-shoe { left: 17px; } .right-shoe { right: 17px; }
+.ground { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; background: #78350f; border-top: 5px solid #f59e0b; }
+.brick-row { height: 100%; background-image: linear-gradient(90deg,rgba(255,255,255,.15) 2px,transparent 2px), linear-gradient(rgba(255,255,255,.15) 2px,transparent 2px); background-size: 42px 28px; }
+.dialogue { position: relative; margin: 0 auto; width: min(850px, 92%); min-height: 190px; background: #020617; border: 5px solid #facc15; box-shadow: inset 0 0 0 4px #92400e, 0 0 24px rgba(250,204,21,.25); padding: 22px; z-index: 2; }
+.label { margin: 0 0 8px; color: #67e8f9; font-size: 14px; letter-spacing: 3px; }
+.dialogue h1 { margin: 0; color: #facc15; font-size: clamp(32px, 6vw, 64px); line-height: 1; text-shadow: 4px 4px #7c2d12; }
+.dialogue p { font-size: clamp(15px, 2vw, 20px); line-height: 1.6; color: #e2e8f0; }
+.controls { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; margin-top: 16px; }
+.controls a, .links a, .page-actions a, .quest-grid a { background: #111827; color: #f8fafc; border: 4px solid #64748b; padding: 14px 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; box-shadow: inset -4px -4px #020617; text-decoration: none; text-align: center; }
+.controls a:hover, .controls a.active, .links a:hover, .page-actions a:hover, .quest-grid a:hover { background: #facc15; color: #020617; border-color: #fde68a; transform: translateY(-3px); }
+.links, .page-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.quest-grid, .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+.cards div { background: #0f172a; border: 3px solid #475569; padding: 14px; box-shadow: inset -4px -4px #020617; }
+.cards h3 { color: #facc15; margin: 0 0 8px; }
+.cards p { margin: 0; font-size: 15px; }
+.skill-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.skill-list span { background: #1e293b; border: 3px solid #64748b; color: #f8fafc; padding: 10px 14px; box-shadow: inset -3px -3px #020617; }
+@media (max-width: 850px) { .screen { min-height: 680px; } .controls { grid-template-columns: repeat(2, 1fr); } .castle { opacity: .45; right: 12px; } .avatar { left: 50%; } .block-one { left: 30px; } .block-two { left: 100px; } .block-three { left: 170px; } .quest-grid, .cards { grid-template-columns: 1fr; } }
