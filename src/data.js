@@ -8,12 +8,18 @@ export const doors = [
 ];
 
 export const facts = [
-  "Fun fact: I love mixing AI projects with creative design.",
-  "Quest tip: My rooftop detection project uses satellite imagery and segmentation.",
-  "Fun fact: I like building portfolios that feel like experiences, not resumes.",
-  "Quest tip: Walk near a glowing door and press E to enter a stage.",
-  "Fun fact: I work with React, Python, PyTorch, OpenCV, and app development.",
-  "World lore: This map is my portfolio, but every door is a chapter.",
+  
+  "Did you know? I love movies and my Letterboxd ID is @himadriB28 ",
+  "I am a big Formula 1 fan — Carlos Sainz is one of my favourites ",
+  "In my free time, I love sketching and making creative designs ",
+  "I enjoy building projects that mix AI, design, and storytelling.",
+  "My current AI/ML interest is computer vision and satellite image analysis.",
+  "I like portfolios that feel like experiences, not just boring resumes.",
+  "Fun fact: Octopuses have three hearts.",
+  "Fun fact: Bananas are berries, but strawberries are not.",
+  "Fun fact: The Eiffel Tower can grow taller in summer because metal expands.",
+  "Fun fact: A day on Venus is longer than a year on Venus.",
+  "Fun fact: Formula 1 cars can lose several kilograms of weight during a race due to fuel burn and tyre wear."
 ];
 
 export const stages = {

@@ -30,7 +30,7 @@ function StagePage() {
         <Link to="/stage/about">About</Link>
         <Link to="/stage/projects">Projects</Link>
         <Link to="/stage/skills">Skills</Link>
-        <Link to="/stage/experience">BISAG-N</Link>
+        <Link to="/stage/experience">Internship</Link>
         <Link to="/stage/achievements">Trophies</Link>
         <Link to="/stage/contact">Contact</Link>
       </nav>

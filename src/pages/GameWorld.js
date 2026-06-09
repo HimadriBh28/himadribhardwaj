@@ -44,7 +44,7 @@ function GameWorld() {
   const [sound, setSound] = useState(false);
   const [visitorName, setVisitorName] = useState(() => localStorage.getItem("visitorName") || "");
   const [showNameBox, setShowNameBox] = useState(() => !localStorage.getItem("visitorName"));
-  const [bubble, setBubble] = useState("Hi, I am Himadri — AI/ML Intern at BISAG-N, MeitY tech cutie at JUIT Solan ✨");
+  const [bubble, setBubble] = useState("Hi, I am Himadri — AI/ML Intern at BISAG-N, MeitY and B.Tech student at JUIT Solan ");
   const [factIndex, setFactIndex] = useState(0);
   const [transitionDoor, setTransitionDoor] = useState(null);
   const timerRef = useRef(null);
@@ -123,7 +123,7 @@ function GameWorld() {
       <header className="hud">
         <div>
           <p className="eyebrow">HIMADRI.EXE</p>
-          <h1>Pixel Portfolio World</h1>
+          <h1>Portfolio Quest</h1>
         </div>
         <div className="hud-actions">
           <button onClick={() => setSound((value) => !value)} type="button">
