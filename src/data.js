@@ -2,7 +2,7 @@ export const doors = [
   { id: "about", label: "About", x: 110, y: 180 },
   { id: "projects", label: "Projects", x: 365, y: 122 },
   { id: "skills", label: "Skills", x: 630, y: 210 },
-  { id: "experience", label: "BISAG-N", x: 875, y: 135 },
+  { id: "experience", label: "Internship", x: 875, y: 135 },
   { id: "achievements", label: "Trophies", x: 1125, y: 235 },
   { id: "contact", label: "Portal", x: 1390, y: 160 },
 ];
