@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 * { box-sizing: border-box; }
 :root {
   --ink: #f8fafc;
@@ -8,8 +10,14 @@
   --purple: #7c3aed;
   --dark: #030712;
 }
-body { color: var(--ink); font-family: "Courier New", monospace; }
-button, input, a { font-family: inherit; }
+body {
+  color: var(--ink);
+  font-family: "Press Start 2P", monospace;
+}
+
+button, input, a {
+  font-family: inherit;
+}
 button { cursor: pointer; }
 .scanlines {
   position: fixed; inset: 0; pointer-events: none; z-index: 30;
